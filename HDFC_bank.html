@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HDFC Bank | Net Banking</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f5fa;
+    color: #263247;
+}
+
+header {
+    background: white;
+    padding: 17px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #d92335;
+    box-shadow: 0 2px 8px #00000010;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #123c70;
+}
+
+.logo-symbol {
+    width: 45px;
+    height: 45px;
+    background: #123c70;
+    color: white;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    font-weight: bold;
+    border-bottom: 5px solid #d92335;
+}
+
+.logo h1 {
+    font-size: 21px;
+}
+
+.logo small {
+    display: block;
+    color: #d92335;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.top-label {
+    color: #123c70;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 245px;
+    background: #123c70;
+    padding: 25px 15px;
+    flex-shrink: 0;
+}
+
+.sidebar h3 {
+    color: #b9cce3;
+    font-size: 12px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 14px;
+    margin: 4px 0;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+    background: #d92335;
+}
+
+main {
+    flex: 1;
+    padding: 30px;
+    min-width: 0;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-title {
+    color: #123c70;
+    margin-bottom: 20px;
+}
+
+.hero {
+    background: linear-gradient(120deg, #123c70, #2365a6);
+    color: white;
+    padding: 40px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+}
+
+.hero h2 {
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+.hero button {
+    background: #d92335;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 11px;
+    box-shadow: 0 3px 12px #00000008;
+    border: 1px solid #e5eaf1;
+}
+
+.card h3 {
+    color: #123c70;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #68778b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.amount {
+    color: #d92335;
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.bank-card {
+    background: linear-gradient(130deg, #123c70, #3277b5);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 390px;
+    min-height: 210px;
+    margin: 20px 0;
+    box-shadow: 0 8px 20px #123c7030;
+}
+
+.bank-card h3 {
+    margin-bottom: 35px;
+}
+
+.bank-card .number {
+    letter-spacing: 3px;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.bank-card small {
+    color: #dce8f5;
+}
+
+.info-box {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    margin: 18px 0;
+    border-left: 4px solid #d92335;
+    line-height: 1.7;
+}
+
+.info-box h3 {
+    color: #123c70;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e7ebf0;
+    font-size: 14px;
+}
+
+th {
+    background: #123c70;
+    color: white;
+}
+
+.status {
+    color: #16834b;
+    font-weight: bold;
+}
+
+.fraud-section {
+    background: #fff9ed;
+    border: 1px solid #f0d49b;
+    border-left: 5px solid #d92335;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.fraud-section h2 {
+    color: #a51d2d;
+    margin-bottom: 12px;
+}
+
+.fraud-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 13px;
+    margin-top: 20px;
+}
+
+.fraud-item {
+    background: white;
+    border: 1px solid #f0dfbd;
+    border-radius: 9px;
+    padding: 17px;
+    line-height: 1.6;
+}
+
+.fraud-item strong {
+    display: block;
+    color: #123c70;
+    margin-bottom: 7px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #68778b;
+    font-size: 12px;
+    background: white;
+    border-top: 1px solid #e3e8ef;
+}
+
+@media(max-width: 700px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar h3 {
+        grid-column: 1 / -1;
+    }
+
+    main {
+        padding: 17px;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    header {
+        padding: 14px;
+    }
+
+    .top-label {
+        display: none;
+    }
+}
+.form-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin: 20px 0;
+    max-width: 650px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+.form-title {
+    color: #123c70;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #263247;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd4df;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    background: #123c70;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #d92335;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+.header-login {
+    background: #123c70;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.header-login:hover {
+    background: #d92335;
+}
+
+.login-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+        .login-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .login-header h2 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+        .login-header p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+        }
+        .password-wrapper {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 13px;
+            color: #007bff;
+            user-select: none;
+            font-weight: 600;
+        }
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .forgot-pass {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-pass:hover {
+            text-decoration: underline;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        /* Centre only the login page */
+#login.page.active {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login .page-title {
+    width: 100%;
+    text-align: center;
+}
+
+#login .login-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#login.page.active {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login .page-title {
+    width: 100%;
+    text-align: center;
+}
+
+#login .login-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.cc{position:relative;max-width:390px;min-height:215px;padding:24px;border-radius:18px;color:#fff;background:linear-gradient(135deg,#0d2f5a,#2365a6 60%,#3b8ad0);box-shadow:0 12px 28px #123c7040;overflow:hidden;margin:4px 0 20px;transition:.3s}
+.cc::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:#ffffff14}
+.cc.debit{background:linear-gradient(135deg,#7a1420,#d92335 70%,#ef5a68);box-shadow:0 12px 28px #d9233540}
+.cc.frozen{filter:grayscale(1) brightness(.8);opacity:.7}
+.cc-top,.cc-bot{display:flex;justify-content:space-between}
+.cc-top{font-weight:bold}
+.cc-bot{margin-top:18px;font-size:12px;color:#dce8f5}
+.chip{width:42px;height:32px;border-radius:6px;background:linear-gradient(135deg,#f6d77a,#c9a23a);margin:26px 0 14px}
+.cc .num{letter-spacing:3px;font-size:19px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;align-items:start}
+.stack>.card{margin-bottom:18px}
+.bar{height:10px;background:#e5eaf1;border-radius:9px;overflow:hidden;margin:12px 0 8px}
+.bar i{display:block;height:100%;background:#16834b;border-radius:9px;transition:width .3s,background .3s}
+.bar i.p{background:#123c70}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#68778b;padding:4px 0}
+.row b{color:#263247}
+.sw{display:flex;justify-content:space-between;align-items:center;margin:0;padding:12px 0;border-bottom:1px solid #eef1f5;font-size:14px;font-weight:normal;cursor:pointer}
+.sw:last-child{border:0}
+.sw input{display:none}
+.sw .t{width:42px;height:24px;background:#c5cedb;border-radius:20px;position:relative;transition:.2s;flex-shrink:0}
+.sw .t::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s}
+.sw input:checked+.t{background:#16834b}
+.sw input:checked+.t::after{left:21px}
+.mini{background:#eef3fa;color:#123c70;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:bold}
+.fld{margin-bottom:16px}
+.fld .lab{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
+.fld .lab b{color:#d92335}
+.fld input[type=range]{width:100%;accent-color:#d92335}
+.fld input[type=number]{width:100%;padding:11px;border:1px solid #ccd4df;border-radius:6px;font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.chipb{padding:9px 16px;border:1px solid #ccd4df;border-radius:20px;background:#fff;cursor:pointer;font-size:13px;color:#263247}
+.chipb.on{background:#123c70;color:#fff;border-color:#123c70}
+.big{font-size:30px;font-weight:bold;color:#123c70;margin:4px 0}
+.res{padding:14px 16px;border-radius:10px;font-size:14px;line-height:1.6;background:#eef3fa;border-left:5px solid #68778b}
+.res.ok{background:#e9f6ef;border-color:#16834b}
+.res.warn{background:#fff6e0;border-color:#e0a100}
+.res.no{background:#fdecee;border-color:#d92335}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;counter-reset:s;margin-top:12px}
+.steps div{background:#fff;border:1px solid #e5eaf1;border-radius:10px;padding:16px;font-size:13px;line-height:1.5;color:#68778b}
+.steps div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#d92335;color:#fff;font-weight:bold;margin-bottom:10px}
+.steps b{display:block;color:#123c70}
+.note{font-size:12px;color:#68778b;margin-top:10px}
+.secure{display:flex;align-items:center;gap:8px;color:#123c70;font-size:13px;font-weight:bold}
+.secure svg{width:20px;height:20px;fill:none;stroke:#16834b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ico{width:44px;height:44px;border-radius:12px;background:#fdecee;display:grid;place-items:center;margin-bottom:12px}
+.ico svg{width:24px;height:24px;fill:none;stroke:#d92335;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero{position:relative;overflow:hidden}
+.hero-art{display:none}
+@media(min-width:951px){.hero-art{display:block;position:absolute;right:36px;top:50%;transform:translateY(-50%);width:270px;pointer-events:none}.hero h2,.hero p{max-width:min(650px,calc(100% - 300px))}}
+@media(max-width:700px){.secure{display:none}}
+#login.page.active,#account.page.active{position:relative;overflow:hidden;border-radius:16px;padding:36px 20px;background:radial-gradient(circle at 12% 18%,#d9233520 0,transparent 38%),radial-gradient(circle at 88% 82%,#2365a636 0,transparent 42%),linear-gradient(135deg,#e6eef8,#f7f9fd)}
+#login.page.active::before,#account.page.active::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28'><circle cx='2' cy='2' r='1.4' fill='%23123c70' fill-opacity='.14'/></svg>");pointer-events:none}
+#login.page.active::after,#account.page.active::after{content:"";position:absolute;right:-24px;bottom:-24px;width:280px;height:280px;opacity:.09;pointer-events:none;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23123c70' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 10l9-6 9 6'/><path d='M5 10v8M10 10v8M14 10v8M19 10v8'/><path d='M3 20h18'/></svg>") no-repeat center/contain}
+#login>*,#account>*{position:relative;z-index:1}
+#account .page-title{text-align:center}
+#account .form-container{margin:20px auto;box-shadow:0 8px 24px #123c7018}
+#login .login-card{box-shadow:0 8px 24px #123c7018}
+@media(max-width:700px){#login.page.active,#account.page.active{padding:22px 12px}#login.page.active::after,#account.page.active::after{width:180px;height:180px}}
+.qchip{padding:8px 14px;border:1px solid #ccd4df;border-radius:20px;background:#fff;cursor:pointer;font-size:13px;color:#263247}
+.qchip:hover{border-color:#d92335;color:#d92335}
+#withdrawals table{display:block;overflow-x:auto}
+body:not(.in) .sidebar{display:none}
+body.in #hdrBtn{display:none}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:#123c70;color:#fff;padding:12px 20px;border-radius:8px;font-size:14px;opacity:0;transition:.3s;pointer-events:none;z-index:50;box-shadow:0 6px 18px #00000030}
+.toast.on{opacity:1;transform:translateX(-50%)}
+</style>
+</head>
+
+<body>
+
+<header>
+    
+    <div class="logo">
+        <div class="logo-symbol"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-6 9 6"/><path d="M5 10v8M10 10v8M14 10v8M19 10v8"/><path d="M3 20h18"/></svg></div>
+        <div>
+            <h1>HDFC Bank</h1>
+            <small>BANKING SERVICES</small>
+        </div>
+    </div>
+
+    <div class="secure"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Secure Banking</div>
+
+    <button class="header-login" id="hdrBtn" onclick="hdr()">
+        Login Portal
+    </button>
+</header>
+
+
+<div class="layout">
+
+<aside class="sidebar">
+    <h3>Banking Services</h3>
+    <button class="active" onclick="showPage('home', this)">⌂ &nbsp; Home</button>
+    <button onclick="showPage('credit', this)">▣ &nbsp; Credit Cards</button>
+    <button onclick="showPage('debit', this)">▤ &nbsp; Debit Cards</button>
+    <button onclick="showPage('withdrawals', this)">↗ &nbsp; Withdrawals</button>
+    <button onclick="showPage('loans', this)">▥ &nbsp; Loan Approval</button>
+    <button onclick="showPage('account', this)">▣ &nbsp; Account Details</button>
+    
+</aside>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="page active">
+    <div class="hero"><svg class="hero-art" viewBox="0 0 260 180" aria-hidden="true"><circle cx="150" cy="90" r="82" fill="#fff" opacity=".08"/><g transform="rotate(-8 100 90)"><rect x="30" y="50" width="150" height="92" rx="12" fill="#fff"/><rect x="30" y="68" width="150" height="16" fill="#d92335"/><rect x="44" y="96" width="26" height="20" rx="4" fill="#f2c94c"/><rect x="44" y="124" width="70" height="6" rx="3" fill="#c5cedb"/></g><g fill="#f2c94c" stroke="#c9a23a"><ellipse cx="205" cy="146" rx="26" ry="8"/><ellipse cx="205" cy="136" rx="26" ry="8"/><ellipse cx="205" cy="126" rx="26" ry="8"/></g><g fill="#fff" opacity=".9"><rect x="176" y="40" width="10" height="24" rx="2"/><rect x="192" y="28" width="10" height="36" rx="2"/><rect x="208" y="14" width="10" height="50" rx="2"/></g><path d="M178 34L212 8" stroke="#d92335" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M44 14l24 8v20c0 14-10 24-24 30-14-6-24-16-24-30V22z" fill="#d92335"/><path d="M34 42l8 8 14-16" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2>Welcome to HDFC Bank</h2>
+        <p>
+            Explore banking services.
+        </p>
+    </div>
+
+    <h2 class="page-title">Banking Overview</h2>
+
+    <div class="cards">
+        <div class="card">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><h3>Credit Cards</h3>
+            <p>Learn about credit limits, billing cycles and responsible card usage.</p>
+        </div>
+        <div class="card">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><h3>Debit Cards</h3>
+            <p>Understand card payments, ATM usage and transaction safety.</p>
+        </div>
+        <div class="card">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 20h16"/></svg></div><h3>Withdrawals</h3>
+            <p>Learn how ATM withdrawals work and how to stay safe.</p>
+        </div>
+        <div class="card">
+            <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h10M7 10h10M9 6c5 0 5 7-1 7h-1l8 6"/></svg></div><h3>Loan Services</h3>
+            <p>Explore different types of loans and approval stages.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CREDIT CARDS -->
+<section id="credit" class="page">
+<h2 class="page-title">Credit Card Services</h2>
+<div class="two">
+<div class="stack">
+ <div class="cc">
+  <div class="cc-top"><span>HDFC Bank</span><span>VISA</span></div>
+  <div class="chip"></div>
+  <div class="num">XXXX XXXX XXXX 4821</div>
+  <div class="cc-bot"><span>SAMPLE USER</span><span>VALID THRU 08/29</span></div>
+ </div>
+ <div class="card"><h3>Card Controls</h3>
+  <label class="sw">Online transactions<input type="checkbox" id="c1" checked><span class="t"></span></label><label class="sw">Contactless payments<input type="checkbox" id="c2" checked><span class="t"></span></label><label class="sw">International usage<input type="checkbox" id="c3"><span class="t"></span></label>
+ </div>
+</div>
+<div class="stack">
+ <div class="card"><h3>Credit Utilisation</h3>
+  <div class="big" id="pct">0%</div>
+  <div class="bar"><i id="ubar"></i></div>
+  <div class="row"><span>Used <b id="usedV"></b></span><span>Available <b id="availV"></b></span></div>
+  <div class="row"><span>Total limit</span><b>₹75,000</b></div>
+  <div class="fld" style="margin:14px 0 4px"><div class="lab"><span>Try a new purchase</span><b id="spendV">₹0</b></div>
+  <input type="range" id="spend" min="0" max="56000" step="500" value="0"></div>
+  
+ </div>
+ <div class="card"><h3>Billing Cycle</h3>
+  <div class="row"><span>Statement date</span><b>12th of every month</b></div>
+  <div class="row"><span>Payment due date</span><b>2nd of every month</b></div>
+  <div class="row"><span>Minimum amount due</span><b>₹920</b></div>
+  
+ </div>
+ <div class="card"><h3>Reward Points</h3>
+  <div class="amount">1,250 <span style="font-size:13px;color:#68778b;font-weight:normal">of 2,000 to next milestone</span></div>
+  <div class="bar"><i class="p" style="width:62.5%"></i></div>
+ </div>
+</div>
+</div>
+<h3 style="color:#123c70;margin-top:25px">Recent Transactions</h3>
+<div style="overflow-x:auto"><table>
+<tr><th>Date</th><th>Merchant</th><th>Amount</th></tr>
+<tr><td>12 Oct 2026</td><td>Grocery Store</td><td>₹2,340</td></tr>
+<tr><td>09 Oct 2026</td><td>Online Shopping</td><td>₹6,999</td></tr>
+<tr><td>04 Oct 2026</td><td>Fuel Station</td><td>₹1,800</td></tr>
+<tr><td>28 Sep 2026</td><td>Restaurant</td><td>₹3,150</td></tr>
+</table></div>
+
+</section>
+
+<!-- DEBIT CARDS -->
+<section id="debit" class="page">
+<h2 class="page-title">Debit Card Services</h2>
+<div class="two">
+<div class="stack">
+ <div class="cc debit" id="dcard">
+  <div class="cc-top"><span>HDFC Bank</span><span>RuPay</span></div>
+  <div class="chip"></div>
+  <div class="num">XXXX XXXX XXXX 7392</div>
+  <div class="cc-bot"><span>SAMPLE USER</span><span>VALID THRU 03/28</span></div>
+ </div>
+ <div class="card"><h3>Card Controls</h3>
+  <label class="sw">Block card temporarily<input type="checkbox" id="freeze"><span class="t"></span></label><label class="sw">ATM withdrawals<input type="checkbox" id="d1" checked><span class="t"></span></label><label class="sw">Online payments<input type="checkbox" id="d2" checked><span class="t"></span></label><label class="sw">Contactless payments<input type="checkbox" id="d3" checked><span class="t"></span></label><label class="sw">International usage<input type="checkbox" id="d4"><span class="t"></span></label>
+ </div>
+</div>
+<div class="stack">
+ <div class="card"><h3>Linked Account Balance</h3>
+  <div class="big" id="bal">₹ ••••••</div>
+  <button class="mini" id="reveal" type="button">Show</button>
+ </div>
+ <div class="card"><h3>Daily ATM Limit</h3>
+  <div class="fld" style="margin:8px 0 0"><div class="lab"><span>Set your limit</span><b id="atmV">₹25,000</b></div>
+  <input type="range" id="atm" min="5000" max="50000" step="1000" value="25000"></div>
+  
+ </div>
+ 
+</div>
+</div>
+</section>
+
+<!-- WITHDRAWALS -->
+<section id="withdrawals" class="page">
+    <h2 class="page-title">ATM Withdrawals</h2>
+
+    <div class="cards">
+        <div class="card"><h3>Daily ATM Limit</h3><div class="amount" id="wLimit">₹25,000</div><p>Set in the Debit Cards tab.</p></div>
+        <div class="card"><h3>Last Withdrawal</h3><div class="amount">₹2,000</div><p>05 Oct 2026</p></div>
+        <div class="card"><h3>Last 12 Months</h3><div class="amount">₹6,500</div><p>3 withdrawals</p></div>
+    </div>
+
+    <div class="card" style="max-width:650px;margin-bottom:18px">
+        <h3>Withdrawal Simulator</h3>
+        <div class="fld"><div class="lab"><span>Amount to withdraw (₹)</span></div><input type="number" id="wamt" min="0" step="100" value="5000"></div>
+        <div class="chips">
+            <button type="button" class="qchip" data-v="500">₹500</button>
+            <button type="button" class="qchip" data-v="2000">₹2,000</button>
+            <button type="button" class="qchip" data-v="10000">₹10,000</button>
+            <button type="button" class="qchip" data-v="30000">₹30,000</button>
+        </div>
+        <div class="res" id="wres"></div>
+        
+    </div>
+
+    <div class="info-box">
+        <h3>How ATM Withdrawals Work</h3>
+        1. Insert your debit card into the ATM.<br>
+        2. Select your preferred language.<br>
+        3. Enter your PIN privately.<br>
+        4. Choose the withdrawal option.<br>
+        5. Enter the required amount.<br>
+        6. Collect your cash and card.
+    </div>
+
+    
+
+    <h3 style="color:#123c70;margin-top:25px">Transaction History</h3>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Transaction</th><th>Location</th><th>Status</th>
+            <th>Amount</th>
+            
+        </tr>
+        <tr>
+            <td>05 Oct 2026</td>
+            <td>ATM Withdrawal</td>
+            <td>HDFC ATM, MG Road</td><td class="status">Successful</td><td>₹2,000</td>
+            
+        </tr>
+        <tr>
+            <td>01 Jun 2026</td>
+            <td>ATM Withdrawal</td>
+            <td>HDFC ATM, Koramangala</td><td class="status">Successful</td><td>₹1,500</td>
+            
+        </tr>
+        <tr>
+            <td>19 Apr 2026</td>
+            <td>ATM Withdrawal</td>
+            <td>HDFC ATM, Indiranagar</td><td class="status">Successful</td><td>₹3,000</td>
+            
+        </tr>
+    </table>
+</section>
+
+<!-- LOANS -->
+<section id="loans" class="page">
+<h2 class="page-title">Loan Approval Information</h2>
+<div class="chips">
+ <button class="chipb on" data-t="personal" data-d="Unsecured funds for personal expenses and planned needs.">Personal Loan</button>
+ <button class="chipb" data-t="home" data-d="Financing to purchase or construct a home, usually with a long tenure.">Home Loan</button>
+ <button class="chipb" data-t="education" data-d="Assistance for eligible educational expenses.">Education Loan</button>
+ <button class="chipb" data-t="vehicle" data-d="Financing for purchasing an eligible vehicle.">Vehicle Loan</button>
+</div>
+<p class="note" id="ldesc" style="margin:0 0 18px">Unsecured funds for personal expenses and planned needs.</p>
+<div class="two">
+ <div class="card"><h3>EMI Calculator</h3>
+  <div class="fld"><div class="lab"><span>Loan amount</span><b id="amtV"></b></div><input type="range" id="amt" min="50000" max="10000000" step="50000" value="500000"></div>
+  <div class="fld"><div class="lab"><span>Interest rate (p.a.)</span><b id="rateV"></b></div><input type="range" id="rate" min="6" max="20" step="0.1" value="11"></div>
+  <div class="fld"><div class="lab"><span>Tenure</span><b id="yrsV"></b></div><input type="range" id="yrs" min="1" max="30" step="1" value="4"></div>
+  <div class="row"><span>Monthly EMI</span></div><div class="big" id="emiV"></div>
+  <div class="bar"><i class="p" id="pbar"></i></div>
+  <div class="row"><span>Principal</span><span>Interest <b id="intV"></b></span></div>
+  <div class="row"><span>Total payable</span><b id="totV"></b></div>
+  
+ </div>
+ <div class="card"><h3>Quick Eligibility Check</h3>
+  <div class="fld"><div class="lab"><span>Monthly income (₹)</span></div><input type="number" id="inc" min="0" value="60000"></div>
+  <div class="fld"><div class="lab"><span>Existing monthly EMIs (₹)</span></div><input type="number" id="exi" min="0" value="5000"></div>
+  <div class="fld"><div class="lab"><span>Credit score (300–900)</span></div><input type="number" id="scr" min="300" max="900" value="760"></div>
+  <div class="res" id="res"></div>
+ </div>
+</div>
+<div class="info-box" style="margin-top:22px;border:0;background:none;padding:0">
+ <h3>Typical Loan Approval Stages</h3>
+ <div class="steps">
+  <div><b>Application</b>Submit your details and loan request.</div>
+  <div><b>Verification</b>Documents are checked for accuracy.</div>
+  <div><b>Eligibility</b>Income and obligations are assessed.</div>
+  <div><b>Credit check</b>Your credit history is reviewed.</div>
+  <div><b>Decision</b>Approval and loan agreement.</div>
+ </div>
+</div>
+</section>
+
+<!-- ACCOUNT DETAILS -->
+<section id="account" class="page">
+    <h2 class="page-title">Account Details</h2>
+
+    <div class="form-container">
+    <h2 class="form-title">Beneficiary Bank Account Details</h2>
+    <form id="bankDetailsForm">
+        <h3>Account Information</h3>
+
+        <!-- Account Holder Name -->
+        <div class="form-group">
+            <label for="accName">Account Holder Name</label>
+            <input type="text" id="accName" required placeholder="As per bank passbook">
+        </div>
+
+        <!-- Account Type -->
+        <div class="form-group">
+            <label for="accType">Account Type</label>
+            <select id="accType" required>
+                <option value="" disabled selected>Select Account Type</option>
+                <option value="savings">Savings Account</option>
+                <option value="current">Current Account</option>
+            </select>
+        </div>
+
+        <!-- Account Number -->
+        <div class="form-group">
+            <label for="accNumber">Account Number</label>
+            <input type="text" id="accNumber" inputmode="numeric" maxlength="18" required placeholder="Enter account number">
+        </div>
+
+        <!-- Confirm Account Number -->
+        <div class="form-group">
+            <label for="confirmAccNumber">Confirm Account Number</label>
+            <input type="text" id="confirmAccNumber" inputmode="numeric" maxlength="18" required placeholder="Re-enter account number">
+            <div id="matchError" class="error-message">Account numbers do not match.</div>
+        </div>
+
+
+        <button type="submit" class="submit-btn">Save Account Details</button>
+     </form>
+      
+     </div>
+</section>       
+
+<!-- LOGIN -->
+<section id="login" class="page login-page">
+    <h2 class="page-title">Login Portal</h2>
+<div class="login-card">
+    <div class="login-header">
+        <h2>Welcome Back</h2>
+        <p>Please enter your credentials to log in</p>
+    </div>
+    
+    <form id="loginForm">
+        <!-- Email Field -->
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required placeholder="name@example.com" autocomplete="username">
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+                <span class="toggle-password" id="togglePassword">Show</span>
+            </div>
+        </div>
+
+        <!-- Remember Me & Forgot Password -->
+        <div class="form-options">
+            <label class="remember-me">
+                <input type="checkbox" id="rememberMe"> Remember me
+            </label>
+            <a href="#" class="forgot-pass">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Log In</button>
+    </form></div>
+ 
+  </section>
+  </main>
+ </div>
+ <script>
+ function showPage(pageId, button) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
+
+    document.querySelectorAll(".sidebar button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    if (button) {
+        button.classList.add("active");
+    } else {
+        document.querySelectorAll(".sidebar button").forEach(btn => {
+            if (btn.getAttribute("onclick").includes(pageId)) {
+                btn.classList.add("active");
+            }
+        });
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("bankDetailsForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    
+
+    this.reset();
+});
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    
+
+    this.reset();
+});
+
+
+const $=id=>document.getElementById(id),inr=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const LIMIT=75000,USED=18400;
+function util(){const a=+$("spend").value,u=USED+a,p=u/LIMIT*100;
+$("spendV").textContent=inr(a);$("usedV").textContent=inr(u);$("availV").textContent=inr(LIMIT-u);$("pct").textContent=p.toFixed(0)+"%";
+const b=$("ubar");b.style.width=p+"%";b.style.background=p>70?"#d92335":p>30?"#e0a100":"#16834b";
+}
+$("spend").oninput=util;util();
+$("freeze").onchange=e=>$("dcard").classList.toggle("frozen",e.target.checked);
+$("atm").oninput=e=>$("atmV").textContent=inr(e.target.value);
+let shown=false;$("reveal").onclick=function(){shown=!shown;$("bal").textContent=shown?"₹48,250":"₹ ••••••";this.textContent=shown?"Hide":"Show"};
+const L={personal:[500000,11,4],home:[5000000,8.5,20],education:[800000,9.5,7],vehicle:[800000,9,5]};let emi=0;
+function calc(){const P=+$("amt").value,r=+$("rate").value/1200,n=+$("yrs").value*12;
+emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);const tot=emi*n;
+$("amtV").textContent=inr(P);$("rateV").textContent=(+$("rate").value).toFixed(1)+"%";$("yrsV").textContent=$("yrs").value+" yrs";
+$("emiV").textContent=inr(emi);$("intV").textContent=inr(tot-P);$("totV").textContent=inr(tot);$("pbar").style.width=P/tot*100+"%";elig()}
+function elig(){const inc=+$("inc").value,ex=+$("exi").value,sc=+$("scr").value,el=$("res");
+if(!inc){el.className="res";el.textContent="Enter your monthly income to see a result.";return}
+const ratio=((ex+emi)/inc*100).toFixed(0);let c,t;
+if(ex+emi>inc*.5||sc<650)[c,t]=["no","Unlikely at this amount. "+(ex+emi>inc*.5?"Your total EMIs would be "+ratio+"% of income, while lenders typically prefer about 50% or less. Try a lower amount or a longer tenure.":"A credit score below 650 usually makes approval difficult.")];
+else if(sc<750)[c,t]=["warn","Needs review. Your EMIs would be "+ratio+"% of income, but a score under 750 may mean a higher rate or extra checks."];
+else[c,t]=["ok","Looks promising. Your EMIs would be "+ratio+"% of income with a strong credit score."];
+el.className="res "+c;el.textContent=t}
+document.querySelectorAll(".chipb").forEach(b=>b.onclick=()=>{document.querySelectorAll(".chipb").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+const[a,r,y]=L[b.dataset.t];$("amt").value=a;$("rate").value=r;$("yrs").value=y;$("ldesc").textContent=b.dataset.d;calc()});
+["amt","rate","yrs","inc","exi","scr"].forEach(i=>$(i).oninput=calc);calc();
+$("togglePassword").onclick=function(){const f=$("password"),h=f.type==="password";f.type=h?"text":"password";this.textContent=h?"Hide":"Show"};
+function wsim(){const lim=+$("atm").value,a=+$("wamt").value,el=$("wres");$("wLimit").textContent=inr(lim);
+if(!(a>0)){el.className="res";el.textContent="Enter an amount to see how it would work at an ATM.";return}
+if(a%100){el.className="res warn";el.textContent="Most ATMs dispense in multiples of ₹100. Try "+inr(Math.max(100,Math.round(a/100)*100))+".";return}
+if(a>lim){el.className="res no";el.textContent="This is above your daily limit of "+inr(lim)+". Withdraw up to that amount today, or adjust the limit in Debit Cards.";return}
+let r=a;const m=[];[500,200,100].forEach(n=>{const k=Math.floor(r/n);if(k){m.push(k+" × ₹"+n);r-=k*n}});
+el.className="res ok";el.textContent="Allowed. Example note mix: "+m.join(" + ")+" (varies by ATM). Remaining daily limit: "+inr(lim-a)+"."}
+$("wamt").oninput=wsim;$("atm").addEventListener("input",wsim);
+document.querySelectorAll(".qchip").forEach(b=>b.onclick=()=>{$("wamt").value=b.dataset.v;wsim()});wsim();
+let user=null;
+const _sp=showPage;showPage=function(id,b){if(!user&&id!=="login")id="login";_sp(id,b)};
+const tEl=document.body.appendChild(Object.assign(document.createElement("div"),{className:"toast"}));let tt;
+function toast(m){tEl.textContent=m;tEl.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>tEl.classList.remove("on"),2200)}
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function enter(){document.body.classList.add("in");const f=user.split(" ")[0];$("login").remove();
+document.querySelectorAll(".cc-bot span:first-child").forEach(s=>s.textContent=user.toUpperCase());
+document.querySelector("#home .hero h2").textContent="Welcome back, "+f;
+showPage("home",document.querySelector(".sidebar button"))}
+function hdr(){showPage("login")}
+$("login").addEventListener("submit",e=>{const em=$("email").value.trim(),btn=e.target.querySelector(".submit-btn");
+const nm=em.split("@")[0].replace(/[._-]+/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+btn.textContent="Signing in…";btn.disabled=true;
+setTimeout(()=>{user=nm;try{sessionStorage.setItem("hdfcUser",nm)}catch(x){}btn.textContent="Log In";btn.disabled=false;enter()},700)},true);
+$("account").querySelector(".form-container").insertAdjacentHTML("afterend",'<div class="form-container" id="saved" style="display:none"><h3 class="form-title" style="font-size:18px">Linked Account</h3><div id="savedList"></div></div>');
+$("account").addEventListener("submit",e=>{const a=$("accNumber").value.trim(),c=$("confirmAccNumber").value.trim();
+const okM=a===c&&/^\d{9,18}$/.test(a);
+$("matchError").textContent=a!==c?"Account numbers do not match.":"Enter a valid account number (9 to 18 digits).";
+$("matchError").style.display=okM?"none":"block";
+if(!okM){e.preventDefault();e.stopPropagation();return}
+const t=$("accType").value==="savings"?"Savings":"Current";
+$("savedList").insertAdjacentHTML("afterbegin",'<div style="padding:10px 0;border-bottom:1px solid #eef1f5;font-size:14px;line-height:1.6"><b>'+esc($("accName").value.trim())+'</b><br><span style="color:#68778b">'+t+" · ••••"+a.slice(-4)+"</span></div>");
+try{localStorage.setItem("hdfcAcct",JSON.stringify({n:$("accName").value.trim(),t:t,l:a.slice(-4)}))}catch(x){}renderAcct();toast("Account details saved")},true);
+document.querySelectorAll(".sw input").forEach(i=>i.addEventListener("change",()=>toast(i.id==="freeze"?(i.checked?"Card blocked":"Card unblocked"):i.parentElement.childNodes[0].textContent.trim()+(i.checked?" turned on":" turned off"))));
+function renderAcct(){let a=null;try{a=JSON.parse(localStorage.getItem("hdfcAcct"))}catch(x){}
+const f=document.querySelector("#account .form-container"),s=$("saved");
+if(!a){f.style.display="";s.style.display="none";return}
+f.style.display="none";
+$("savedList").innerHTML='<div style="padding:10px 0;font-size:14px;line-height:1.7"><b>'+esc(a.n)+'</b><br><span style="color:#68778b">'+esc(a.t)+" · ••••"+esc(a.l)+'</span></div><button type="button" class="submit-btn" style="margin-top:14px;background:#d92335" onclick="logout()">Logout &amp; remove account</button>';
+s.style.display="block"}
+function logout(){try{localStorage.removeItem("hdfcAcct");sessionStorage.removeItem("hdfcUser")}catch(x){}location.reload()}
+renderAcct();
+let saved=null;try{saved=sessionStorage.getItem("hdfcUser")}catch(x){}
+if(saved){user=saved;enter()}else showPage("login");
+</script>
+
+</body>
+</html>

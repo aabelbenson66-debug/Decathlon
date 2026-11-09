@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087a45">
+  <title>Decathlon Sports | Gear up for your next adventure</title>
+  <style>
+    :root {
+      --blue: #087a45;
+      --blue-dark: #075d36;
+      --ink: #17231d;
+      --muted: #6f7972;
+      --line: #e4e9e5;
+      --bg: #f5f7f5;
+      --white: #fff;
+      --yellow: #ffdf46;
+      --shadow: 0 16px 50px rgba(20, 45, 31, .12);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .topline {
+      padding: 9px 16px;
+      background: #eaf5ee;
+      color: #22533a;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .02em;
+    }
+    .header {
+      position: sticky;
+      z-index: 4;
+      top: 0;
+      display: flex;
+      height: 72px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 0 max(calc((100vw - 1200px) / 2), 5%);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+    }
+    .wordmark {
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.08em;
+      white-space: nowrap;
+    }
+    .wordmark span { color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+    .nav { display: flex; align-items: center; gap: 25px; }
+    .nav a { color: #47544b; font-size: 12px; font-weight: 600; }
+    .nav a:hover { color: var(--blue); }
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .search {
+      width: min(230px, 23vw);
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      outline-color: var(--blue);
+      background: #f8faf8;
+      font-size: 11px;
+    }
+    .cart-button {
+      position: relative;
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+    }
+    .cart-button:hover { background: #eef4f0; }
+    .cart-button svg { width: 21px; height: 21px; stroke: currentColor; }
+    .cart-count {
+      position: absolute;
+      top: 0;
+      right: -2px;
+      display: grid;
+      min-width: 17px;
+      height: 17px;
+      place-items: center;
+      padding: 0 4px;
+      border-radius: 20px;
+      background: var(--blue);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 430px;
+      align-items: center;
+      margin: 16px auto 0;
+      max-width: 1400px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(6,37,29,.82), rgba(6,37,29,.46) 46%, rgba(6,37,29,.02)),
+        url("https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&w=2000&q=85") center 48% / cover;
+      color: white;
+    }
+    .hero-content { max-width: 560px; padding: 55px 25px 55px max(7%, calc((100vw - 1150px) / 2)); }
+    .eyebrow { margin-bottom: 13px; color: #c9efda; font-size: 10px; font-weight: 750; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 0 0 14px; font-size: clamp(42px, 6vw, 68px); font-weight: 850; letter-spacing: -.065em; line-height: .96; }
+    .hero p:not(.eyebrow) { max-width: 390px; margin: 0 0 23px; color: rgba(255,255,255,.84); font-size: 13px; line-height: 1.7; }
+    .primary, .secondary {
+      display: inline-flex;
+      min-height: 43px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 17px;
+      border: 1px solid var(--blue);
+      border-radius: 3px;
+      background: var(--blue);
+      color: white;
+      font-size: 11px;
+      font-weight: 750;
+      transition: background .18s ease, transform .18s ease;
+    }
+    .primary:hover, .secondary:hover { transform: translateY(-1px); background: var(--blue-dark); }
+    .hero .primary { border-color: var(--yellow); background: var(--yellow); color: #1b291f; }
+    .hero .primary:hover { background: #f4cf2a; }
+    .perks {
+      display: grid;
+      max-width: 1080px;
+      grid-template-columns: repeat(3, 1fr);
+      margin: auto;
+      padding: 22px 4%;
+      border-bottom: 1px solid var(--line);
+      background: white;
+    }
+    .perk { display: flex; align-items: center; justify-content: center; gap: 9px; color: #435248; font-size: 10px; font-weight: 600; }
+    .perk + .perk { border-left: 1px solid var(--line); }
+    .perk svg { width: 17px; height: 17px; stroke: var(--blue); }
+    main { min-height: 50vh; }
+    .shop { max-width: 1200px; margin: auto; padding: 65px 5% 78px; }
+    .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
+    .kicker { margin: 0 0 8px; color: var(--blue); font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(27px, 4vw, 37px); font-weight: 800; letter-spacing: -.055em; }
+    .section-note { margin: 0 0 3px; color: var(--muted); font-size: 11px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 21px; }
+    .filter {
+      min-height: 31px;
+      padding: 0 12px;
+      border: 1px solid #dfe5e0;
+      border-radius: 20px;
+      background: white;
+      color: #5c6860;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .filter:hover, .filter.active { border-color: var(--blue); background: var(--blue); color: white; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px; }
+    .card { display: flex; min-width: 0; flex-direction: column; background: white; }
+    .photo { position: relative; aspect-ratio: 1 / 1.05; overflow: hidden; background: #e9efeb; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .photo--helmet { background: radial-gradient(ellipse at center, #f8fbf8 0%, #e4eee7 64%, #d7e4db 100%); }
+    .photo--helmet img { position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); border-radius: 4px; }
+    .card:hover .photo img { transform: scale(1.04); }
+    .badge { position: absolute; top: 10px; left: 10px; padding: 5px 7px; background: var(--yellow); color: #243126; font-size: 8px; font-weight: 800; text-transform: uppercase; }
+    .add {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 50%;
+      background: white;
+      color: var(--blue);
+      box-shadow: 0 2px 10px #0002;
+      font-size: 22px;
+    }
+    .add:hover { background: var(--blue); color: white; }
+    .card-info { flex-grow: 1; padding: 12px; }
+    .company { margin: 0 0 5px; color: var(--blue); font-size: 8px; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+    .product-name { display: -webkit-box; height: 38px; margin: 0 0 9px; overflow: hidden; font-size: 13px; font-weight: 650; line-height: 1.4; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+    .price { font-size: 14px; font-weight: 800; }
+    .mrp-price { margin-left: 5px; color: var(--muted); font-size: 11px; font-weight: 400; text-decoration: line-through; }
+    .review { color: #777f79; font-size: 10px; font-weight: 500; }
+    .no-results { grid-column: 1 / -1; padding: 55px 15px; color: var(--muted); text-align: center; font-size: 12px; }
+    footer { padding: 30px 5%; background: #183c2b; color: white; text-align: center; }
+    footer strong { font-size: 14px; letter-spacing: -.03em; }
+    footer p { margin: 8px 0 0; color: #c7d7cc; font-size: 9px; line-height: 1.6; }
+    .notice { margin: 10px auto 0; max-width: 760px; }
+    .overlay {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: flex;
+      justify-content: flex-end;
+      visibility: hidden;
+      background: rgba(14, 26, 18, .42);
+      opacity: 0;
+      transition: opacity .2s ease, visibility .2s ease;
+    }
+    .overlay.open { visibility: visible; opacity: 1; }
+    .panel {
+      display: flex;
+      width: min(460px, 100%);
+      height: 100%;
+      flex-direction: column;
+      padding: 23px;
+      transform: translateX(100%);
+      background: white;
+      box-shadow: var(--shadow);
+      transition: transform .25s ease;
+    }
+    .overlay.open .panel { transform: translateX(0); }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+    .panel-head h2 { font-size: 22px; }
+    .close {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: #f0f3f1;
+      font-size: 19px;
+    }
+    .cart-lines { flex: 1; overflow: auto; }
+    .cart-empty { display: grid; height: 100%; align-content: center; justify-items: center; color: var(--muted); font-size: 12px; }
+    .cart-row { display: grid; grid-template-columns: 67px 1fr auto; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .cart-row img { width: 67px; height: 76px; object-fit: cover; }
+    .cart-row h3 { margin: 2px 0 5px; font-size: 12px; }
+    .cart-row p { margin: 0 0 9px; color: var(--muted); font-size: 9px; }
+    .qty { display: flex; align-items: center; gap: 10px; }
+    .qty button { width: 23px; height: 23px; border: 1px solid var(--line); border-radius: 50%; background: white; }
+    .qty button:hover { background: var(--line); }
+    .qty span { font-size: 12px; font-weight: 700; }
+    .row-price { font-size: 10px; font-weight: 750; }
+    .cart-summary { padding-top: 15px; border-top: 1px solid var(--line); }
+    .summary-line { display: flex; justify-content: space-between; margin: 7px 0; font-size: 11px; }
+    .summary-line.total { margin-top: 11px; font-size: 14px; font-weight: 800; }
+    .shipping { margin: 9px 0 14px; color: var(--muted); font-size: 9px; }
+    .wide { width: 100%; }
+    .checkout-link { display: block; margin-top: 10px; color: var(--blue); text-align: center; font-size: 10px; font-weight: 700; }
+    .checkout-link:hover { text-decoration: underline; }
+    .checkout-panel { width: min(920px, 100%); overflow: auto; }
+    .checkout-panel .panel-head { margin-bottom: 16px; }
+    .steps { display: flex; gap: 8px; margin-bottom: 18px; color: #87918a; font-size: 9px; font-weight: 700; }
+    .steps span { padding: 7px 10px; border-radius: 20px; background: #f0f3f1; }
+    .steps .current { background: #e3f3e9; color: var(--blue-dark); }
+    .checkout-wrapper { display: grid; grid-template-columns: 7fr 5fr; align-items: start; gap: 30px; }
+    .form-box { margin-bottom: 20px; padding: 24px; border: 1px solid var(--line); border-radius: 6px; background: white; }
+    .form-title { margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line); color: var(--blue); font-size: 16px; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; }
+    .form-section { margin: 0 0 17px; padding: 0; border: 0; }
+    .form-section legend { margin-bottom: 10px; font-size: 12px; font-weight: 800; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .field { display: grid; gap: 5px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #5d6860; font-size: 9px; font-weight: 650; }
+    .field input, .field select { width: 100%; min-height: 38px; padding: 9px; border: 1px solid #dce3de; border-radius: 3px; outline-color: var(--blue); background: white; font-size: 10px; }
+    .checkout-summary { position: sticky; top: 0; }
+    .checkout-items { display: grid; gap: 10px; margin-bottom: 15px; }
+    .checkout-item { display: flex; justify-content: space-between; gap: 12px; color: #48554c; font-size: 10px; line-height: 1.5; }
+    .checkout-item strong { flex: 0 0 auto; color: var(--ink); }
+    .checkout-summary .summary-line { font-size: 10px; }
+    .checkout-summary .summary-line.total { font-size: 13px; }
+    .payment-options { display: grid; gap: 7px; }
+    .payment-option { display: flex; align-items: flex-start; gap: 9px; padding: 10px; border: 1px solid var(--line); border-radius: 3px; cursor: pointer; }
+    .payment-option:has(input:checked) { border-color: var(--blue); background: #f1f8f3; }
+    .payment-option input { margin-top: 2px; accent-color: var(--blue); }
+    .payment-option strong { display: block; margin-bottom: 3px; font-size: 10px; }
+    .payment-option small { display: block; color: var(--muted); font-size: 8px; line-height: 1.4; }
+    .otp-box { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .otp-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+    .otp-controls input { min-width: 0; min-height: 38px; padding: 9px; border: 1px solid #dce3de; border-radius: 3px; outline-color: var(--blue); font-size: 12px; letter-spacing: .18em; }
+    .otp-controls .secondary { min-height: 38px; padding: 0 11px; font-size: 9px; }
+    .otp-status { min-height: 14px; margin: 7px 0 0; color: var(--blue-dark); font-size: 9px; line-height: 1.5; }
+    .otp-status:empty { display: none; }
+    .payment-demo { margin: 9px 0 0; padding: 9px; border-left: 3px solid var(--yellow); background: #fff9db; color: #5d5429; font-size: 9px; line-height: 1.5; }
+    .checkout-total { display: flex; justify-content: space-between; margin: 13px 0; font-size: 12px; font-weight: 800; }
+    .test-label { margin: 9px 0 0; color: var(--muted); text-align: center; font-size: 8px; line-height: 1.5; }
+    @media (max-width: 768px) {
+      .checkout-wrapper { grid-template-columns: 1fr; gap: 0; }
+      .checkout-summary { position: static; }
+    }
+
+    .receipt-panel { width: min(550px, 100%); overflow: auto; }
+    .receipt-mark { display: grid; width: 44px; height: 44px; place-items: center; margin: 19px auto 9px; border-radius: 50%; background: #e6f4eb; color: var(--blue); font-size: 23px; font-weight: 800; }
+    .receipt-title { margin: 0; text-align: center; font-size: 22px; font-weight: 800; }
+    .receipt-subtitle { margin: 6px 0 17px; color: var(--muted); text-align: center; font-size: 10px; }
+    .receipt-box { margin: 0 0 14px; padding: 14px; border: 1px dashed #cbd6ce; border-radius: 4px; background: #fbfcfb; }
+    .receipt-id { margin: 0 0 12px; color: var(--blue); font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+    .receipt-items { display: grid; gap: 8px; }
+    .receipt-item, .receipt-detail { display: flex; justify-content: space-between; gap: 12px; font-size: 9px; }
+    .receipt-detail { margin-top: 8px; color: #667169; }
+    .receipt-divider { margin: 11px 0; border: 0; border-top: 1px solid var(--line); }
+    .receipt-total { display: flex; justify-content: space-between; font-size: 12px; font-weight: 850; }
+    .receipt-address { margin: 5px 0 0; color: var(--muted); font-size: 9px; line-height: 1.5; }
+    .receipt-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 14px; }
+    .secondary { border-color: var(--line); background: white; color: var(--ink); }
+    .secondary:hover { background: #f0f3f1; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 800px) {
+      .header { gap: 13px; padding: 0 4%; }
+      .nav { gap: 13px; }
+      .nav a { font-size: 10px; }
+      .header-actions { gap: 5px; }
+      .search { width: 155px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shop { padding-right: 4%; padding-left: 4%; }
+    }
+    @media (max-width: 560px) {
+      .header { height: 62px; }
+      .wordmark { font-size: 20px; }
+      .wordmark span { display: none; }
+      .nav { display: none; }
+      .search { width: min(45vw, 180px); }
+      .hero { min-height: 420px; margin-top: 9px; background-position: 58% center; }
+      .hero-content { padding-left: 7%; }
+      h1 { font-size: 49px; }
+      .perks { grid-template-columns: 1fr; gap: 12px; padding: 17px 8%; }
+      .perk { justify-content: flex-start; }
+      .perk + .perk { padding-top: 11px; border-top: 1px solid var(--line); border-left: 0; }
+      .shop { padding-top: 49px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .photo { aspect-ratio: 1 / 1.12; }
+      .card-info { padding: 9px; }
+      .product-name { min-height: 30px; font-size: 11px; }
+      .company { font-size: 7px; }
+      .price { font-size: 12px; }
+      .review { font-size: 8px; }
+      .panel { padding: 18px; }
+      .form-box { padding: 17px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+    }
+    @media print {
+      body * { visibility: hidden !important; }
+      #receipt-panel, #receipt-panel * { visibility: visible !important; }
+      #receipt-panel { position: absolute; inset: 0; width: 100%; height: auto; overflow: visible; box-shadow: none; }
+      #receipt-panel .panel-head, #receipt-panel .receipt-actions { display: none !important; }
+      .receipt-box { border: 1px solid #aaa; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+
+    /* ---- Catalogue upgrade ---- */
+    .photo svg { display: block; width: 100%; height: 100%; }
+    .layer { position: absolute; inset: 0; transition: opacity .35s ease; }
+    .l1 { opacity: 0; }
+    .card:hover .l1, .card:focus-visible .l1 { opacity: 1; }
+    .card { cursor: pointer; border: 1px solid transparent; transition: box-shadow .2s, border-color .2s; }
+    .card:hover { border-color: var(--line); box-shadow: var(--shadow); }
+    .card:focus-visible { outline: 2px solid var(--blue); }
+    .photo .badge, .photo .off, .photo .wish, .photo .add, .photo .qv { z-index: 2; }
+    .off { position: absolute; left: 10px; bottom: 10px; padding: 5px 7px; border-radius: 2px; background: var(--blue); color: #fff; font-size: 9px; font-weight: 800; }
+    .wish { position: absolute; top: 8px; right: 8px; display: grid; width: 30px; height: 30px; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #8a948d; box-shadow: 0 2px 8px #0002; font-size: 16px; line-height: 1; }
+    .wish.on { color: #e0334c; }
+    .qv { position: absolute; top: 50%; left: 50%; padding: 8px 14px; border-radius: 20px; background: rgba(255,255,255,.95); box-shadow: 0 2px 10px #0002; color: var(--ink); font-size: 10px; font-weight: 750; opacity: 0; pointer-events: none; transform: translate(-50%, -30%); transition: opacity .2s, transform .2s; white-space: nowrap; }
+    .card:hover .qv { opacity: 1; transform: translate(-50%, -50%); }
+    .dots { display: flex; gap: 4px; margin: 0 0 7px; }
+    .dots i { width: 11px; height: 11px; border: 1px solid #0003; border-radius: 50%; }
+    .stars { color: #777f79; font-size: 10px; font-weight: 600; }
+    .stars b { padding: 2px 5px; border-radius: 3px; background: #e3f3e9; color: var(--blue-dark); font-size: 10px; }
+    .off-text { margin-left: 5px; color: var(--blue); font-size: 10px; font-weight: 750; }
+    .sort { margin-left: auto; min-height: 31px; padding: 0 10px; border: 1px solid #dfe5e0; border-radius: 20px; background: #fff; color: #5c6860; font-size: 10px; font-weight: 600; }
+    .overlay.center { align-items: center; justify-content: center; padding: 18px; }
+    .pdp { width: min(1060px, 100%); max-height: 100%; overflow: auto; padding: 18px 24px 26px; border-radius: 8px; background: #fff; box-shadow: var(--shadow); transform: translateY(18px) scale(.98); transition: transform .25s ease; }
+    .overlay.open .pdp { transform: none; }
+    .pdp-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--muted); font-size: 10px; }
+    .pdp-grid { display: grid; grid-template-columns: 1.12fr 1fr; align-items: start; gap: 32px; }
+    .gallery { display: flex; gap: 12px; }
+    .thumbs { display: flex; flex-direction: column; gap: 8px; }
+    .thumb { width: 68px; height: 68px; padding: 0; overflow: hidden; border: 2px solid var(--line); border-radius: 4px; background: #fff; }
+    .thumb.on { border-color: var(--blue); }
+    .thumb svg, .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .stage { position: relative; flex: 1; min-width: 0; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 6px; background: #e9efeb; cursor: zoom-in; }
+    .zoomwrap { width: 100%; height: 100%; transition: transform .15s ease-out; }
+    .stage.zoomed .zoomwrap { transform: scale(2.4); }
+    .zoomwrap svg, .zoomwrap img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .zoom-hint { position: absolute; left: 10px; bottom: 10px; padding: 5px 9px; border-radius: 20px; background: rgba(255,255,255,.92); color: #3d4a41; font-size: 9px; font-weight: 700; pointer-events: none; }
+    .view-name { position: absolute; top: 10px; left: 10px; padding: 4px 8px; border-radius: 3px; background: rgba(23,35,29,.75); color: #fff; font-size: 9px; font-weight: 700; pointer-events: none; }
+    .pdp .company { font-size: 10px; }
+    .pdp h2 { font-size: 26px; line-height: 1.15; }
+    .rate-line { display: flex; align-items: center; gap: 9px; margin: 10px 0 14px; color: var(--muted); font-size: 10px; }
+    .rate-line b { padding: 3px 7px; border-radius: 3px; background: var(--blue); color: #fff; font-size: 11px; }
+    .pdp-price { display: flex; align-items: baseline; gap: 10px; }
+    .pdp-price strong { font-size: 28px; font-weight: 850; letter-spacing: -.03em; }
+    .pdp-price s { color: var(--muted); font-size: 14px; }
+    .pdp-price em { color: var(--blue); font-size: 12px; font-style: normal; font-weight: 800; }
+    .tax { margin: 3px 0 14px; color: var(--muted); font-size: 9px; }
+    .desc { margin: 0; color: #435248; font-size: 12px; line-height: 1.7; }
+    .opt-label { margin: 18px 0 8px; font-size: 10px; font-weight: 800; }
+    .opt-label span { color: var(--muted); font-weight: 600; }
+    .size-err { margin-left: 8px; color: #d6334c; font-weight: 700; }
+    .swatches, .sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .swatch { width: 32px; height: 32px; padding: 0; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 1.5px #cfd8d2; }
+    .swatch.on { box-shadow: 0 0 0 2px var(--blue); }
+    .size { min-width: 48px; min-height: 36px; padding: 0 10px; border: 1px solid #d6ddd8; border-radius: 3px; background: #fff; font-size: 10px; font-weight: 700; }
+    .size:hover { border-color: var(--blue); }
+    .size.on { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .buyrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 22px; }
+    .qtybox { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 3px; }
+    .qtybox button { width: 34px; height: 43px; border: 0; background: #fff; font-size: 17px; }
+    .qtybox span { min-width: 26px; text-align: center; font-size: 12px; font-weight: 700; }
+    .buyrow .primary, .buyrow .secondary { flex: 1; min-width: 120px; }
+    .mini-perks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 16px 0 0; padding: 0; color: #435248; font-size: 10px; font-weight: 600; list-style: none; }
+    .mini-perks li::before { content: "✓ "; color: var(--blue); font-weight: 800; }
+    .pdp h3 { margin: 24px 0 10px; font-size: 14px; font-weight: 800; }
+    .hl { margin: 0; padding-left: 18px; color: #435248; font-size: 11px; line-height: 1.9; }
+    .specs { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .specs td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+    .specs td:first-child { width: 38%; color: var(--muted); }
+    .related { margin-top: 34px; padding-top: 6px; border-top: 1px solid var(--line); }
+    .rel-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .rel { padding: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: #fff; text-align: left; }
+    .rel:hover { box-shadow: var(--shadow); }
+    .rel .ph { aspect-ratio: 1; }
+    .rel .ph svg { display: block; width: 100%; height: 100%; }
+    .rel div.t { padding: 9px 10px 11px; font-size: 11px; font-weight: 650; line-height: 1.35; }
+    .rel div.t span { display: block; margin-top: 4px; font-weight: 800; }
+    .cart-row .cthumb { width: 67px; height: 76px; overflow: hidden; border-radius: 3px; }
+    .cart-row .cthumb svg { display: block; width: 100%; height: 100%; }
+    @media (max-width: 760px) {
+      .pdp { padding: 14px 14px 22px; }
+      .pdp-grid { grid-template-columns: 1fr; gap: 20px; }
+      .gallery { flex-direction: column-reverse; }
+      .thumbs { flex-direction: row; }
+      .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sort { margin-left: 0; }
+    }
+    .photo img, .thumb img, .zoomwrap img, .rel .ph img, .cart-row .cthumb img { display: block; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; user-select: none; }
+    .photo { background: #eef1ee; }
+    .layer img { transition: none; }
+    .card:hover .photo img { transform: none; }
+    .zoomwrap { will-change: transform; }
+    .stage { touch-action: pan-y; }
+    .cthumb { background: #eef1ee; }
+    @media (hover: none) { .l1 { display: none; } .qv { display: none; } }
+  
+    /* ---- Card PIN entry ---- */
+    .pin-box { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+    .pin-box[hidden] { display: none; }
+    .pin-label { display: block; margin-bottom: 9px; font-size: 10px; font-weight: 700; }
+    .pin-row { display: flex; gap: 10px; }
+    .pin-digit { width: 46px; height: 52px; padding: 0; border: 1.5px solid #dce3de; border-radius: 6px; background: #fff; outline-color: var(--blue); text-align: center; font-size: 22px; font-weight: 800; transition: border-color .15s, background .15s; }
+    .pin-digit.filled { border-color: var(--blue); background: #f1f8f3; }
+    .pin-digit.bad { border-color: #d9413a; background: #fdf0ef; animation: pin-shake .3s; }
+    .pin-status { min-height: 14px; margin: 8px 0 0; color: #b3322c; font-size: 9px; line-height: 1.5; }
+    .pin-status:empty { display: none; }
+    @keyframes pin-shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+  
+    /* ---- Responsive hero image (all devices) ---- */
+    .hero {
+      isolation: isolate;
+      min-height: clamp(400px, 38vw, 640px);
+      max-width: min(100%, 1680px);
+      background: linear-gradient(135deg, #072f22, #087a45 70%, #1f8a5a);
+    }
+    .hero-media, .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .hero-media { z-index: -2; }
+    .hero-media img { object-fit: cover; object-position: 60% 45%; -webkit-user-drag: none; user-select: none; }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: linear-gradient(90deg, rgba(6,37,29,.84), rgba(6,37,29,.48) 46%, rgba(6,37,29,.04)); }
+    .hero.no-photo .hero-media { display: none; }
+    .hero-content { position: relative; width: 100%; padding-right: clamp(16px, 4vw, 40px); }
+    @media (max-width: 1100px) {
+      .hero-media img { object-position: 62% 40%; }
+    }
+    @media (max-width: 768px) {
+      .hero { min-height: clamp(460px, 120vw, 640px); margin-top: 0; align-items: flex-end; }
+      .hero::before { background: linear-gradient(180deg, rgba(6,37,29,.18) 0%, rgba(6,37,29,.45) 38%, rgba(6,37,29,.9) 100%); }
+      .hero-media img { object-position: 64% 30%; }
+      .hero-content { max-width: none; padding: 40px 6% 34px; }
+      .hero p:not(.eyebrow) { max-width: 460px; }
+    }
+    @media (max-width: 380px) {
+      h1 { font-size: 40px; }
+      .hero-content { padding: 32px 5% 28px; }
+    }
+    @media (max-height: 480px) and (orientation: landscape) {
+      .hero { min-height: 340px; align-items: center; }
+      .hero::before { background: linear-gradient(90deg, rgba(6,37,29,.86), rgba(6,37,29,.5) 55%, rgba(6,37,29,.06)); }
+      .hero-content { padding: 26px 6%; max-width: 560px; }
+      h1 { font-size: clamp(30px, 9vh, 44px); }
+    }
+    @media (min-width: 1680px) { .hero-content { padding-left: 120px; } }
+    @media print { .hero-media { display: none; } .hero { background: #087a45 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  
+    /* ---- Header fits every width (no sideways scroll) ---- */
+    @media (max-width: 900px) {
+      .header { gap: 10px; }
+      .wordmark, .header-actions { flex: 0 0 auto; }
+      .nav { flex: 1 1 auto; min-width: 0; gap: 14px; overflow-x: auto; scrollbar-width: none; }
+      .nav::-webkit-scrollbar { display: none; }
+      .nav a { white-space: nowrap; }
+      .search { width: clamp(90px, 22vw, 170px); }
+    }
+    @media (max-width: 560px) { .wordmark span { display: none; } }
+    @media (max-width: 480px) { .nav { display: none; } .header { justify-content: space-between; } .search { width: clamp(100px, 42vw, 200px); } }
+  
+    /* ---- Images that work on every device ---- */
+    img { max-width: 100%; }
+    .shot { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; isolation: isolate; background: #eef1ee; }
+    .shot .frame { position: absolute; inset: 0; display: block; transform-origin: 50% 50%; transition: transform .25s ease; }
+    .shot .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: var(--filt, none); transition: filter .25s ease, opacity .3s ease; }
+    .shot:not(.loaded) .frame img { opacity: 0; }
+    .shot:not(.loaded):not(.broken) { background: linear-gradient(110deg, #eef1ee 30%, #f7f9f7 50%, #eef1ee 70%) 0 0 / 200% 100%; animation: shot-shimmer 1.3s linear infinite; }
+    @keyframes shot-shimmer { to { background-position: -200% 0; } }
+    .shot::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--tint, transparent); mix-blend-mode: var(--blend, normal); opacity: var(--op, 0); pointer-events: none; transition: opacity .25s ease, background .25s ease; }
+    .shot.v1 .frame { transform: scaleX(-1) scale(1.16); }
+    .shot.v1 .frame img { object-position: 58% 50%; }
+    .shot.v2 .frame { transform: scale(1.85); transform-origin: 50% 42%; }
+    .shot.broken { animation: none; }
+    .shot.broken .frame, .shot.broken::after { display: none; }
+    .shot.broken::before { content: attr(data-name); position: absolute; inset: 0; display: grid; place-items: center; padding: 10px; background: linear-gradient(135deg, #eef3ef, #dfe8e2); color: #5c6860; font-size: 11px; font-weight: 700; text-align: center; line-height: 1.35; }
+    .dots button { width: 13px; height: 13px; padding: 0; border: 1px solid #0003; border-radius: 50%; }
+    .dots button.on { box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--blue); }
+    .dots button:hover { transform: scale(1.15); }
+    .thumbs { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; scrollbar-width: thin; }
+    .thumb { flex: 0 0 auto; }
+    .stage { max-width: 100%; }
+    .toast { position: fixed; z-index: 60; left: 50%; bottom: 26px; max-width: 90vw; padding: 11px 18px; border-radius: 4px; background: #17231d; color: #fff; font-size: 12px; font-weight: 650; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 12px); transition: opacity .2s ease, transform .2s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .toast:empty { display: none; }
+    @media (max-width: 560px) { .thumb { width: 58px; height: 58px; } .grid { gap: 18px 10px; } }
+    @media (prefers-reduced-motion: reduce) { .shot:not(.loaded):not(.broken) { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="topline">Free delivery on orders above ₹999 · Easy 30-day returns · Gear up and get moving</div>
+  <header class="header">
+    <a class="wordmark" href="#" aria-label="Decathlon Sports home">DECATHLON <span>SPORTS INDIA</span></a>
+    <nav class="nav" aria-label="Sports categories">
+      <a href="#shop" data-category="All">All sports</a>
+      <a href="#shop" data-category="Running">Running</a>
+      <a href="#shop" data-category="Fitness">Fitness</a>
+      <a href="#shop" data-category="Cycling">Cycling</a>
+      <a href="#shop" data-category="Camping">Camping</a>
+    </nav>
+    <div class="header-actions">
+      <label><span class="sr-only">Search sports gear</span><input id="search" class="search" type="search" placeholder="Search gear"></label>
+      <button id="open-cart" class="cart-button" aria-label="Open shopping cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M4 5h2l2 11h10l2-8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <picture class="hero-media">
+        <source media="(max-width: 600px)" srcset="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=600&h=900 600w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=900&h=1350 900w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1200&h=1800 1200w" sizes="100vw">
+        <source media="(max-width: 1100px)" srcset="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=900&h=900 900w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1400&h=1100 1400w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1800&h=1400 1800w" sizes="100vw">
+        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1600&h=900" srcset="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1000&h=600 1000w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=1600&h=900 1600w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=2200&h=1100 2200w, https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=3000&h=1300 3000w" sizes="(min-width: 1680px) 1680px, 100vw" width="1600" height="900" alt="A runner on a road at sunrise" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.hero').classList.add('no-photo')">
+      </picture>
+      <div class="hero-content">
+        <p class="eyebrow">Find your next adventure</p>
+        <h1>Move more.<br>Feel good.</h1>
+        <p>Everyday sports gear for new beginnings, personal bests, and everything in between.</p>
+        <a class="primary" href="#shop">Shop sports gear <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="perks" aria-label="Store benefits">
+      <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7"></path><circle cx="7.5" cy="18" r="1.5"></circle><circle cx="17.5" cy="18" r="1.5"></circle></svg>Free delivery over ₹999</div>
+      <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5"></path><path d="M4 4v4.5h4.5M12 8v4l3 2"></path></svg>Easy 30-day returns</div>
+      <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 3 4 6v5c0 5 3.4 8.2 8 10 4.6-1.8 8-5 8-10V6l-8-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>Built for your next move</div>
+    </section>
+    <section class="shop" id="shop">
+      <div class="section-heading">
+        <div><p class="kicker">Get out there</p><h2>Gear up for every sport.</h2></div>
+        <p id="result-count" class="section-note">Explore customer favorites for sport and outdoors.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by sport">
+        <button class="filter active" data-filter="All">All gear</button>
+        <button class="filter" data-filter="Running">Running</button>
+        <button class="filter" data-filter="Fitness">Fitness</button>
+        <button class="filter" data-filter="Cycling">Cycling</button>
+        <button class="filter" data-filter="Camping">Camping</button>
+        <button class="filter" data-filter="Water sports">Water sports</button>
+        <button class="filter" data-filter="Team sports">Team sports</button>
+        <button class="filter" data-filter="Racket sports">Racket sports</button>
+        <label class="sr-only" for="sort">Sort products</label>
+        <select id="sort" class="sort"><option value="">Sort: Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option><option value="rate">Top rated</option></select>
+      </div>
+      <div class="grid" id="products" aria-live="polite"></div>
+    </section>
+  </main>
+  <footer>
+    <strong>DECATHLON SPORTS INDIA</strong>
+  </footer>
+
+  <div class="overlay" id="cart-overlay" aria-hidden="true">
+    <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="cart-heading">
+      <div class="panel-head"><h2 id="cart-heading">Your cart</h2><button class="close" data-close aria-label="Close cart">×</button></div>
+      <div class="cart-lines" id="cart-lines"></div>
+      <div class="cart-summary">
+        <div class="summary-line"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+        <div class="summary-line"><span>Delivery</span><span id="delivery">₹0</span></div>
+        <div class="summary-line total"><span>Total</span><span id="total">₹0</span></div>
+        <p class="shipping" id="shipping-note"></p>
+        <button id="checkout-start" class="primary wide">Proceed to checkout →</button>
+        <a href="#shop" class="checkout-link" data-close>Continue shopping</a>
+      </div>
+    </aside>
+  </div>
+
+  <div class="overlay" id="checkout-overlay" aria-hidden="true">
+    <section class="panel checkout-panel" role="dialog" aria-modal="true" aria-labelledby="checkout-heading">
+      <div class="panel-head"><h2 id="checkout-heading">Checkout</h2><button class="close" data-close aria-label="Close checkout">×</button></div>
+      <div class="steps"><span>1 &nbsp; Cart</span><span class="current">2 &nbsp; Delivery & payment</span><span>3 &nbsp; Receipt</span></div>
+      <form id="checkout-form">
+        <div class="checkout-wrapper">
+          <div>
+            <section class="form-box">
+              <h3 class="form-title">Delivery details</h3>
+              <fieldset class="form-section">
+                <legend class="sr-only">Delivery address</legend>
+                <div class="form-grid">
+                  <div class="field"><label for="customer-name">Full name</label><input id="customer-name" name="name" autocomplete="name" required maxlength="80"></div>
+                  <div class="field"><label for="customer-phone">Mobile number</label><input id="customer-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" title="Enter a 10-digit Indian mobile number" placeholder="10-digit number" required></div>
+                  <div class="field full"><label for="customer-address">Address</label><input id="customer-address" name="address" autocomplete="street-address" required maxlength="140"></div>
+                  <div class="field"><label for="customer-city">City</label><input id="customer-city" name="city" autocomplete="address-level2" required maxlength="60"></div>
+                  <div class="field"><label for="customer-pincode">PIN code</label><input id="customer-pincode" name="pincode" inputmode="numeric" autocomplete="postal-code" pattern="[1-9][0-9]{5}" title="Enter a valid 6-digit PIN code" required></div>
+                </div>
+              </fieldset>
+            </section>
+            <section class="form-box">
+              <h3 class="form-title">Payment method</h3>
+              <fieldset class="form-section">
+                <legend class="sr-only">Choose a payment method</legend>
+                <div class="payment-options">
+                  <label class="payment-option"><input type="radio" name="payment" value="UPI" checked><span><strong>UPI</strong></span></label>
+                  <label class="payment-option"><input type="radio" name="payment" value="Card"><span><strong>Credit or debit card</strong></span></label>
+                </div>
+                <div class="otp-box" id="otp-box">
+                  <div class="field">
+                    <label for="payment-otp"> transaction OTP</label>
+                    <div class="otp-controls">
+                      <input id="payment-otp" name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit OTP" aria-describedby="otp-status" required>
+                      <button class="secondary" id="send-demo-otp" type="button">Generate OTP</button>
+                    </div>
+                  </div>
+                  <p class="otp-status" id="otp-status" role="status" aria-live="polite"></p>
+                </div>
+                <div class="pin-box" id="pin-box" hidden>
+                  <label class="pin-label" id="pin-label">Enter your 4-digit card PIN</label>
+                  <div class="pin-row" role="group" aria-labelledby="pin-label">
+                    <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" aria-label="PIN digit 1">
+                    <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" aria-label="PIN digit 2">
+                    <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" aria-label="PIN digit 3">
+                    <input class="pin-digit" type="password" inputmode="numeric" pattern="[0-9]" maxlength="1" autocomplete="off" aria-label="PIN digit 4">
+                  </div>
+                  <p class="pin-status" id="pin-status" role="alert"></p>
+                  
+                </div>
+               
+              </fieldset>
+            </section>
+          </div>
+          <aside class="form-box checkout-summary" aria-label="Order summary">
+            <h3 class="form-title">Your order</h3>
+            <div class="checkout-items" id="checkout-items"></div>
+            <div class="summary-line"><span>Subtotal</span><span id="checkout-subtotal">₹0</span></div>
+            <div class="summary-line"><span>Delivery</span><span id="checkout-delivery">₹0</span></div>
+            <p class="shipping" id="checkout-shipping-note"></p>
+            <div class="checkout-total"><span>Total</span><span id="checkout-total">₹0</span></div>
+            <button class="primary wide" type="submit" id="pay-button">Place order →</button>
+            
+          </aside>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="overlay" id="receipt-overlay" aria-hidden="true">
+    <section class="panel receipt-panel" id="receipt-panel" role="dialog" aria-modal="true" aria-labelledby="receipt-title">
+      <div class="panel-head"><strong>DECATHLON SPORTS INDIA</strong><button class="close" data-close aria-label="Close receipt">×</button></div>
+      <div class="receipt-mark" aria-hidden="true">✓</div>
+      <h2 class="receipt-title" id="receipt-title">Order confirmed</h2>
+      <p class="receipt-subtitle" id="receipt-status"></p>
+      <div id="receipt-content"></div>
+      
+      <div class="receipt-actions">
+        <button class="secondary" id="print-receipt">Print receipt</button>
+        <button class="primary" id="done-shopping">Continue shopping</button>
+      </div>
+    </section>
+  </div>
+  <div class="overlay center" id="product-overlay" aria-hidden="true">
+    <section class="pdp" role="dialog" aria-modal="true" aria-labelledby="pdp-title">
+      <div class="pdp-top"><span>Decathlon Sports India</span><button class="close" data-close aria-label="Close product">×</button></div>
+      <div id="pdp-body"></div>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+    /* ---------- Product images ----------
+       Every picture is a real-life photograph (no cartoon renders) and is built to load on any device:
+       - responsive sizes (srcset) where the host supports it, lazy loading, no layout jump
+       - automatic fallback chain: your photo -> proxied copy (beats hot-link blocks) -> alternate real photo -> stock photo
+       - a stalled or blocked image is retried after a few seconds instead of staying blank
+       - Front / Side / Close-up are framings of the real photo; colour swatches re-colour it. */
+    const VIEW_NAMES = { 0: "Front view", 1: "Side view", 2: "Close-up", photo: "Original photo" };
+    const PHOTO_GALLERIES = {
+      "run-tee": [
+        "https://contents.mediadecathlon.com/p2646514/73080fc960765b4d4bf8af44c34c25e0/p2646514.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2646407/08d4c93f42c22e9c530750ff79b482a3/p2646407.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2646374/85970c72216fcbeac48f1ac410f2276/p2646374.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2646571/888811d2db076029d1cb2cc6e5944376/p2646571.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2646590/14b9cad031d951b703ce071626091074/p2646590.jpg?f=1200x0&format=auto&quality=80"
+      ],
+      "run-shorts": [
+        "https://contents.mediadecathlon.com/p2924609/b13afe4b5fc9f2555c1a52a330c877ae/p2924609.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2924609/b13afe4b5fc9f2555c1a52a330c877ae/p2924609.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2901999/7cc37b075ee626b07efab1cde6513ca0/p2901999.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2786297/0eb5e5e5a027c2531e9de9016bab9b6f/p2786297.jpg?f=1200x0&format=auto&quality=80"
+      ],
+      "swim-goggles": [
+        "https://contents.mediadecathlon.com/p2189867/30a3366f94197852d660d9cc6d44500a/p2189867.jpg?f=1200x0&format=auto&quality=80",
+        "https://contents.mediadecathlon.com/p2189870/354d746c1870241031156d8d11f9d26f/p2189870.jpg?f=1200x0&format=auto&quality=80"
+      ],
+      "yoga-mat": [
+        "https://contents.mediadecathlon.com/p2688738/4e162bce835bda5a12f4dda3544cdb1d/p2688738.jpg?f=1200x0&format=auto&quality=80"
+      ],
+      "tent": [
+        "https://contents.mediadecathlon.com/p2627962/282018f395d786161b63d6f2c63050f3/p2627962.jpg?f=1200x0&format=auto&quality=80"
+      ]
+    };
+    const viewLabel = v => typeof v === "string" && v.startsWith("official")
+      ? `Product photo ${Number(v.slice(8)) + 1}` : VIEW_NAMES[v];
+    const productViews = p => [0, 1, 2].concat(p.photo ? ["photo"] : [],
+      (PHOTO_GALLERIES[p.id] || []).map((_, i) => `official${i}`));
+    const ALT_PHOTOS = {
+      "run-500": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
+      "run-tee": "https://contents.mediadecathlon.com/p2646514/73080fc960765b4d4bf8af44c34c25e0/p2646514.jpg?f=1200x0&format=auto&quality=80",
+      "run-shorts": "https://contents.mediadecathlon.com/p2924609/b13afe4b5fc9f2555c1a52a330c877ae/p2924609.jpg?f=1200x0&format=auto&quality=80",
+      "run-cap": "https://images.unsplash.com/photo-1521369909026-2afc8f07fc8d?auto=format&fit=crop&w=900&q=80",
+      "run-watch": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80",
+      "run-bottle": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=80",
+      "yoga-mat": "https://contents.mediadecathlon.com/p2688738/4e162bce835bda5a12f4dda3544cdb1d/p2688738.jpg?f=1200x0&format=auto&quality=80",
+      "dumbbells": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
+      "kettlebell": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80",
+      "skip-rope": "https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&w=900&q=80",
+      "gym-gloves": "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=900&q=80",
+      "foam-roller": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=900&q=80",
+      "cycle-helmet": "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=900&q=80",
+      "hybrid-bike": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=80",
+      "bike-light": "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=900&q=80",
+      "cycle-gloves": "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80",
+      "cycle-bottle": "https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=900&q=80",
+      "hiking-pack": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80",
+      "tent": "https://contents.mediadecathlon.com/p2627962/282018f395d786161b63d6f2c63050f3/p2627962.jpg?f=1200x0&format=auto&quality=80",
+      "sleeping-bag": "https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=900&q=80",
+      "headlamp": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+      "daypack": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=80",
+      "swim-goggles": "https://contents.mediadecathlon.com/p2189867/30a3366f94197852d660d9cc6d44500a/p2189867.jpg?f=1200x0&format=auto&quality=80",
+      "swim-shorts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+      "football": "https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=900&q=80",
+      "basketball": "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=900&q=80",
+      "badminton": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80"
+};
+    const REAL_PRODUCT_IMAGES = {
+      "run-500": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
+      "run-tee": "https://m.media-amazon.com/images/I/41wl-qCKovL._AC_UY1100_.jpg",
+      "run-shorts": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTU1a1TxgyrccEF_4EWEtWe-zXrtCpqUfEvSCd1rYD6Q&s=10",
+      "run-cap": "https://contents.mediadecathlon.com/p2713532/3a837dc87e7837e90d422db3e21bb408/p2713532.jpg",
+      "run-watch": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80",
+      "run-bottle": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=900&q=80",
+      "yoga-mat": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
+      "dumbbells": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80",
+      "kettlebell": "https://img.tatacliq.com/images/i30//437Wx649H/MP000000030307436_437Wx649H_202603031433002.jpeg",
+      "skip-rope": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO0hsom9LPDRzU8yicgWyWk1L1iCxONgD4Qjk56lxaQA&s=10",
+      "gym-gloves": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEdCXF6v1uCLBnA4DdymI3uuvEoP-EGrZ6x-Cd6jRkAQ&s=10",
+      "foam-roller": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBXdx0fWoRlDKj4pB8HncGMK6bQnD_IBJRhWnUQLjU1A&s=10",
+      "cycle-helmet": "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=900&q=80",
+      "hybrid-bike": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=80",
+      "bike-light": "https://contents.mediadecathlon.com/p2795414/2b4bf299163e73ff7cb98760e69554e1/p2795414.jpg",
+      "cycle-gloves": "https://contents.mediadecathlon.com/p2677912/afe319eea141a950ba5978364b486a7a/p2677912.jpg",
+      "cycle-bottle": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNszNlKIPThtrbs-Ni6Q9haPNPtShpAc60X-bhZz6sEg&s=10",
+      "hiking-pack": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80",
+      "tent": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=80",
+      "sleeping-bag": "https://contents.mediadecathlon.com/p2816282/3ed2008ade6a7c4d3b1ed2a001bf8ab3/p2816282.jpg",
+      "headlamp": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl8btiu94YfNxEaW0JGksw4gKkmjOG_PotukZP3-Gxkg&s=10",
+      "daypack": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxqUf5E2wtzcoCYktLCEZllZkRLuO8OgE0WlL3gAUVOA&s=10",
+      "swim-goggles": "https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=900&q=80",
+      "swim-cap": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPmP66iupat11u1SEYznyW9Uz8FNDONkUdhVV0plxezQ&s=10",
+      "swim-shorts": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWdYMSeTGj4WROQcHC_07vKbRStAU9TMeijwrChxezqQ&s=10",
+      "football": "https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=900&q=80",
+      "basketball": "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=900&q=80",
+      "badminton": "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80"
+    };
+
+    
+    /* ---- real-photo sources, fallbacks, responsive sizes ---- */
+    const PHOTO_QUERY = {
+      "run-500": "running,shoes", "run-tee": "running,tshirt", "run-shorts": "running,shorts", "run-cap": "running,cap",
+      "run-watch": "sports,smartwatch", "run-bottle": "sports,water,bottle", "yoga-mat": "yoga,mat", "dumbbells": "dumbbells,gym",
+      "kettlebell": "kettlebell", "skip-rope": "skipping,rope", "gym-gloves": "gym,gloves", "foam-roller": "foam,roller",
+      "cycle-helmet": "bicycle,helmet", "hybrid-bike": "hybrid,bicycle", "bike-light": "bicycle,light", "cycle-gloves": "cycling,gloves",
+      "cycle-bottle": "cycling,bottle", "hiking-pack": "hiking,backpack", "tent": "camping,tent", "sleeping-bag": "sleeping,bag,camping",
+      "headlamp": "headlamp,camping", "daypack": "daypack,backpack", "swim-goggles": "swimming,goggles", "swim-cap": "swim,cap,pool",
+      "swim-shorts": "swim,shorts", "quick-towel": "towel,beach", "football": "football,soccer,ball", "basketball": "basketball,ball", "badminton": "badminton,racket"
+    };
+    const hashId = id => [...id].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 997, 7);
+    const proxied = (u, w = 900) => `https://images.weserv.nl/?url=${encodeURIComponent(u)}&w=${w}&output=webp&q=82`;
+    const isUnsplash = u => /^https:\/\/images\.unsplash\.com\//.test(u || "");
+    const sized = (u, w) => u.replace(/([?&])w=\d+/, `$1w=${w}`);
+    const photoList = p => {
+      const main = p.photo || REAL_PRODUCT_IMAGES[p.id], alt = ALT_PHOTOS[p.id], off = (PHOTO_GALLERIES[p.id] || [])[0];
+      const list = [main, main && proxied(main), alt, off, alt && proxied(alt),
+        `https://loremflickr.com/900/900/${PHOTO_QUERY[p.id] || encodeURIComponent(p.name)}?lock=${hashId(p.id)}`];
+      return [...new Set(list.filter(Boolean))];
+    };
+
+    /* ---- colour -> blend settings so the real photo takes on the chosen colour ---- */
+    const hexToHsl = hex => {
+      let h = hex.replace("#", ""); if (h.length === 3) h = [...h].map(c => c + c).join("");
+      const r = parseInt(h.slice(0, 2), 16) / 255, g = parseInt(h.slice(2, 4), 16) / 255, b = parseInt(h.slice(4, 6), 16) / 255;
+      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+      return { s: d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1)), l };
+    };
+    const tintStyle = c => {
+      if (!c || !c.a) return "";
+      const { s, l } = hexToHsl(c.a);
+      if (s < .18 && l > .85) return `--tint:${c.a};--blend:normal;--op:0;--filt:saturate(.12) brightness(1.18) contrast(.95)`;
+      if (s < .18 && l < .3)  return `--tint:${c.a};--blend:color;--op:.35;--filt:saturate(.2) brightness(.62) contrast(1.08)`;
+      if (s < .18)            return `--tint:${c.a};--blend:color;--op:.3;--filt:saturate(.2) brightness(.95)`;
+      return `--tint:${c.a};--blend:color;--op:.66;--filt:saturate(1.05)`;
+    };
+    const SIZES = {
+      card: "(max-width: 560px) 50vw, (max-width: 900px) 33vw, 280px",
+      stage: "(max-width: 760px) 92vw, 520px",
+      small: "90px"
+    };
+    const shot = (p, ci, v, eager, alt, ctx = "card") => {
+      const list = photoList(p), first = list[0];
+      const title = `${p.name}${p.colors[ci] ? `, ${p.colors[ci].n}` : ""}, ${(VIEW_NAMES[v] || "photo").toLowerCase()}`;
+      const view = (v === 1 || v === 2) ? ` v${v}` : "";
+      const srcset = isUnsplash(first) ? ` srcset="${[400, 640, 900, 1300].map(w => `${sized(first, w)} ${w}w`).join(", ")}" sizes="${SIZES[ctx] || SIZES.card}"` : "";
+      return `<span class="shot${view}" data-name="${p.name}" style="${tintStyle(p.colors[ci])}"><span class="frame"><img src="${first}"${srcset} data-pid="${p.id}" data-n="0" alt="${alt || title}" width="560" height="560" decoding="async"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} referrerpolicy="no-referrer" draggable="false"></span></span>`;
+    };
+    const pic = (p, ci, v, eager, ctx) => shot(p, ci, v === undefined ? 0 : v, eager, null, ctx);
+    const viewPic = (p, ci, v, eager) => shot(p, ci, v, eager, `${p.name}, ${viewLabel(v).toLowerCase()}`, "stage");
+
+    /* ---- load handling: success, error, and stalled images ---- */
+    const advanceImg = img => {
+      const p = products.find(x => x.id === img.dataset.pid); if (!p) return;
+      const list = photoList(p), n = (+img.dataset.n || 0) + 1;
+      if (n < list.length) { img.dataset.n = n; img.removeAttribute("srcset"); img.removeAttribute("sizes"); img.src = list[n]; }
+      else img.closest(".shot")?.classList.add("broken");
+    };
+    document.addEventListener("load", e => {
+      const img = e.target;
+      if (img instanceof HTMLImageElement && img.dataset.pid) img.closest(".shot")?.classList.add("loaded");
+    }, true);
+    document.addEventListener("error", e => {
+      const img = e.target;
+      if (img instanceof HTMLImageElement && img.dataset.pid) advanceImg(img);
+    }, true);
+    const watchImg = (img, tries = 0) => setTimeout(() => {
+      if (!img.isConnected || img.naturalWidth > 0) return;
+      const r = img.getBoundingClientRect(), near = r.bottom > -innerHeight && r.top < innerHeight * 2;
+      if (near && !img.complete && tries >= 1) { advanceImg(img); watchImg(img, 0); }   // stalled for ~7s while visible
+      else if (tries < 8) watchImg(img, tries + 1);
+    }, 3500);
+    new MutationObserver(list => list.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType !== 1) return;
+      (n.matches?.("img[data-pid]") ? [n] : [...n.querySelectorAll?.("img[data-pid]") || []]).forEach(img => {
+        if (img.complete && img.naturalWidth > 0) img.closest(".shot")?.classList.add("loaded"); else watchImg(img);
+      });
+    }))).observe(document.body, { childList: true, subtree: true });
+
+    const cardColor = {};
+    let toastTimer;
+    const showToast = msg => {
+      const t = byId("toast"); t.textContent = msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+    };
+
+    const mk = (id, brand, name, sport, price, mrp, rating, reviews, type, col, sizes, tag, desc, hl, spec, photo) => ({
+      id, brand, name, sport, price, mrp, rating, reviews, type, sizes, tag, desc, photo: photo || REAL_PRODUCT_IMAGES[id],
+      colors: col.split(";").map(c => { const [n, a, b] = c.split(":"); return { n, a, b }; }),
+      hl: hl.split("|"), spec: spec.split("|").map(s => s.split("="))
+    });
+    const SH = ["UK 6", "UK 7", "UK 8", "UK 9", "UK 10", "UK 11"], AP = ["S", "M", "L", "XL", "XXL"], GL = ["S", "M", "L"], FR = ["S", "M", "L"];
+    const products = [
+      mk("run-500", "KIPRUN", "Run 500 Lightweight Shoes", "Running", 750, 999, 4.6, 2184, "shoe", "Midnight:#1f2a30:#25a35a;Coral:#e8563f:#ffffff;Sky:#3b82c4:#ffdf46", SH, "Best seller", "A light, cushioned everyday road-running shoe for beginners and regular joggers, with a breathable mesh upper.", "Breathable mesh upper|Cushioned midsole for comfort|Grippy outsole for wet and dry roads", "Use=Road running|Weight=About 280 g (UK 8)|Drop=8 mm|Upper=Engineered mesh", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80"),
+      mk("run-tee", "KALENJI", "Dry+ Breathable Running T-shirt", "Running", 399, 599, 4.4, 1320, "tee", "Lime:#8fd14f:#1f2a30;Navy:#26466d:#ffdf46;Red:#d9413a:#ffffff", AP, "Quick dry", "A soft, sweat-wicking tee that keeps you cool on long runs and gym days alike.", "Quick-drying fabric|Flat seams to reduce chafing|Reflective logo for visibility", "Fabric=100% polyester|Fit=Regular|Care=Machine wash cold|Use=Running, gym"),
+      mk("run-shorts", "KALENJI", "Dry 2-in-1 Running Shorts", "Running", 549, 799, 4.3, 864, "shorts", "Black:#22292e:#25a35a;Blue:#2f5fa8:#ffffff", AP, "New", "Lightweight shorts with a built-in inner short and a zip pocket for keys or a card.", "Built-in inner short|Zip pocket|Elastic waist with drawcord", "Fabric=Polyester|Fit=Regular|Pockets=1 zip, 1 side|Care=Machine wash"),
+      mk("run-cap", "KALENJI", "Adjustable Running Cap", "Running", 249, 349, 4.5, 975, "cap", "White:#f5f5f2:#25a35a;Black:#23292d:#ffdf46;Orange:#ef7d2d:#ffffff", null, "Sun protect", "A breathable cap with a curved peak to shield your eyes from the sun on morning and evening runs.", "Moisture-wicking sweatband|Adjustable back strap|Lightweight and packable", "Size=Adjustable 54-60 cm|Fabric=Polyester|Weight=About 45 g"),
+      mk("run-watch", "GEONAUTE", "ONRHYTHM 500 Heart-rate Smartwatch", "Running", 2999, 3999, 4.2, 612, "watch", "Black:#25a35a:#2a2f33;Blue:#4aa3e0:#1d3557", null, "Smart", "Track runs, heart rate, steps and sleep from your wrist with a bright, easy-to-read display.", "Heart-rate monitoring|Multiple sport modes|Water resistant to 50 m", "Battery=Up to 7 days|Water resistance=5 ATM|Connectivity=Bluetooth|Compatible=Android, iOS"),
+      mk("run-bottle", "KIPRUN", "Run Hydration Bottle 750 ml", "Running", 299, 399, 4.5, 540, "bottle", "Green:#25a35a:#17231d;Blue:#2f7fc4:#ffdf46", null, "Hydrate", "A leak-proof squeeze bottle with an easy-to-open cap, made for runs, walks and gym sessions.", "Leak-proof lid|Soft squeeze body|BPA-free plastic", "Capacity=750 ml|Material=BPA-free PP|Weight=About 95 g"),
+
+      mk("yoga-mat", "DOMYOS", "Comfort Yoga Mat 8 mm", "Fitness", 300, 499, 4.7, 3412, "mat", "Teal:#2aa198:#14665f;Purple:#7a5bb5:#4a3375;Grey:#8a949c:#4e585f", null, "Everyday essential", "A thick, non-slip mat that cushions your knees and joints for yoga, pilates and floor workouts.", "8 mm cushioning for joint comfort|Non-slip surface|Rolls up easily", "Size=173 x 61 cm|Thickness=8 mm|Material=NBR foam|Weight=About 700 g", "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?auto=format&fit=crop&w=900&q=80"),
+      mk("dumbbells", "CORENGTH", "Vinyl Dumbbell Set 2 × 2 kg", "Fitness", 270, 399, 4.7, 2105, "dumbbell", "Navy:#2c4a7a:#e8563f;Black:#2b2f33:#25a35a", null, "Home training", "A starter pair of vinyl-coated dumbbells for toning, rehab and home workouts.", "Vinyl coating protects floors|Hexagonal shape stops rolling|Comfortable grip", "Weight=2 x 2 kg|Coating=Vinyl|Core=Cast iron"),
+      mk("kettlebell", "CORENGTH", "Cast Iron Kettlebell 8 kg", "Fitness", 1499, 1999, 4.6, 786, "kettle", "Black:#26292c:#e8563f;Green:#2f6b45:#ffdf46", null, "Strength", "A solid cast iron kettlebell for swings, goblet squats and full-body conditioning.", "Smooth, wide handle|Flat base for stability|Vinyl-coated for floor protection", "Weight=8 kg|Material=Cast iron|Base=Flat"),
+      mk("skip-rope", "DOMYOS", "Speed Skipping Rope 100", "Fitness", 249, 399, 4.5, 1280, "rope", "Orange:#ef7d2d:#2b2f33;Green:#25a35a:#2b2f33", null, "Cardio", "A fast, adjustable rope with smooth bearings for cardio, boxing and warm-ups.", "Smooth ball bearings|Adjustable length|Non-slip handles", "Length=Adjustable up to 3 m|Cable=PVC-coated steel|Handles=Foam grip"),
+      mk("gym-gloves", "DOMYOS", "Weight Training Gloves 500", "Fitness", 349, 499, 4.3, 702, "gloves", "Black:#2a2f33:#25a35a;Grey:#8d979e:#e8563f", GL, "Grip", "Padded gloves that protect your palms and improve grip during lifting sessions.", "Padded palm|Breathable back|Hook-and-loop wrist closure", "Material=Polyester, synthetic leather|Use=Weight training|Care=Hand wash"),
+      mk("foam-roller", "DOMYOS", "Foam Roller 500 (45 cm)", "Fitness", 699, 999, 4.5, 468, "roller", "Blue:#3b82c4:#1d4e80;Black:#2b2f33:#25a35a", null, "Recovery", "A textured foam roller to release tight muscles and speed up recovery after training.", "Textured surface for deep massage|Lightweight and durable|Easy to carry", "Length=45 cm|Diameter=14 cm|Material=EVA foam"),
+
+      mk("cycle-helmet", "ROCKRIDER", "City Cycling Helmet", "Cycling", 450, 699, 4.6, 1893, "helmet", "White:#f4f6f4:#25a35a;Black:#22272b:#ffdf46;Blue:#2f6fb8:#ffffff", ["M", "L"], "Ride safe", "A lightweight, well-ventilated helmet for daily commutes and weekend rides.", "Ventilation channels|Adjustable retention system|Soft chin strap", "Weight=About 280 g|Sizes=M (54-58 cm), L (58-62 cm)|Use=City, road", "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Bicycle_white_helmet_from_bikemate.jpg/960px-Bicycle_white_helmet_from-bikemate.jpg"),
+      mk("hybrid-bike", "RIVERSIDE", "Hybrid Bike 100 (27.5\")", "Cycling", 10999, 13999, 4.6, 934, "bike", "Green:#1f7a4d:#ffdf46;Black:#2a2f33:#e8563f;Blue:#2f6fb8:#ffffff", FR, "Top pick", "A comfortable, upright bike for the city commute and light trails, with 21 gears and a sturdy frame.", "21-speed gears|Front suspension fork|Upright, comfortable position", "Wheel size=27.5 inch|Frame=Aluminium|Gears=21 speed|Brakes=Disc"),
+      mk("bike-light", "ROCKRIDER", "USB Rechargeable Front Bike Light", "Cycling", 599, 799, 4.4, 521, "torch", "Black:#2a2f33:#25a35a;Yellow:#f3c500:#2a2f33", null, "Night rides", "A bright rechargeable front light so you can see and be seen on dark roads.", "USB rechargeable|3 lighting modes|Quick-release bracket", "Output=200 lumens|Battery=Up to 10 hours|Charging=USB"),
+      mk("cycle-gloves", "ROCKRIDER", "Road Cycling Gloves 500", "Cycling", 499, 699, 4.4, 388, "gloves", "Black:#2a2f33:#e8563f;Blue:#2f5fa8:#ffdf46", GL, "Comfort", "Padded half-finger gloves that reduce hand fatigue on long rides.", "Gel-padded palm|Breathable mesh back|Pull tabs for easy removal", "Fingers=Half|Material=Polyester|Care=Hand wash"),
+      mk("cycle-bottle", "ROCKRIDER", "Cycling Water Bottle 650 ml", "Cycling", 199, 299, 4.5, 612, "bottle", "Blue:#2f7fc4:#17231d;Orange:#ef7d2d:#17231d", null, "Hydrate", "A squeezable bottle that fits standard cages and delivers water in one hand.", "Fits standard bottle cages|Push-pull valve|BPA-free", "Capacity=650 ml|Material=BPA-free PE|Weight=About 70 g"),
+
+      mk("hiking-pack", "QUECHUA", "NH Escape Rolltop Hiking Backpack", "Camping", 600, 899, 4.5, 1544, "pack", "Olive:#6b7a48:#2a2f33;Black:#26292c:#ef7d2d;Blue:#2f5f8a:#ffdf46", null, "Trail ready", "A roomy rolltop pack for day hikes and weekend trips with a padded back and comfortable straps.", "Rolltop closure for adjustable volume|Padded back and shoulder straps|Water-repellent fabric", "Capacity=20 L|Weight=About 600 g|Material=Polyester|Pockets=2 side, 1 front", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80"),
+      mk("tent", "QUECHUA", "2 Seconds Fresh & Black Tent", "Camping", 2100, 2999, 4.8, 2761, "tent", "Orange:#ef7d2d:#2a2f33;Green:#3d7a4f:#2a2f33;Blue:#3b73b8:#2a2f33", null, "Weekend escape", "A pop-up tent that opens in seconds, with a dark interior that blocks light for better sleep.", "Opens in 2 seconds|Fresh & Black fabric blocks light and heat|Folds into a flat disc", "Capacity=2 persons|Weight=About 3 kg|Waterproofing=2,000 mm|Packed size=Disc 65 cm", "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80"),
+      mk("sleeping-bag", "QUECHUA", "Trek 500 15°C Sleeping Bag", "Camping", 1999, 2799, 4.5, 693, "bag", "Green:#4f7f52:#2a2f33;Blue:#3b6aa8:#2a2f33", null, "Cosy", "A warm mummy bag with a hood and a two-way zip for cool nights in the outdoors.", "Comfort down to 15°C|Insulated hood|Two-way zip", "Comfort temp=15°C|Weight=About 1.2 kg|Length=190 cm|Fill=Hollow fibre"),
+      mk("headlamp", "QUECHUA", "ONnight 100 Headlamp", "Camping", 799, 1199, 4.4, 902, "torch", "Orange:#ef7d2d:#2a2f33;Black:#2a2f33:#25a35a", null, "Hands-free", "A compact headlamp for camping, trekking and power cuts, with a comfortable elastic strap.", "Tilting lamp head|Multiple light modes|Lightweight", "Output=100 lumens|Battery=3 x AAA|Weight=About 85 g"),
+      mk("daypack", "QUECHUA", "Arpenaz 20 L Day Pack", "Camping", 699, 899, 4.4, 1180, "pack", "Red:#d9413a:#2a2f33;Grey:#6b7479:#ffdf46", null, "Daily use", "A simple daypack for short hikes, college or travel, with padded straps and a roomy main pocket.", "Padded shoulder straps|Front zip pocket|Light and durable", "Capacity=20 L|Weight=About 350 g|Material=Polyester"),
+
+      mk("swim-goggles", "NABAIJI", "Xbase Swimming Goggles", "Water sports", 150, 249, 4.4, 2301, "goggles", "Blue:#2f7fc4:#9fd8f5;Black:#2a2f33:#8fc0e8;Pink:#e0558f:#f3b8d0", null, "Pool essential", "Comfortable goggles with a soft silicone seal and an adjustable nose bridge for everyday swimming.", "Anti-fog lenses|Soft seal|Adjustable nose bridge", "Use=Pool swimming|UV=Protected|Strap=Adjustable silicone", "https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=900&q=80"),
+      mk("swim-cap", "NABAIJI", "Silicone Swim Cap", "Water sports", 199, 299, 4.5, 1456, "cap", "Blue:#2f7fc4:#17231d;Black:#2a2f33:#25a35a;Red:#d9413a:#ffffff", null, "Pool essential", "A durable silicone cap that keeps hair out of your face and cuts drag in the water.", "Stretchy silicone|Fits most head sizes|Long-lasting", "Material=Silicone|Fit=Adult|Care=Rinse after use"),
+      mk("swim-shorts", "NABAIJI", "Swim Shorts 100", "Water sports", 449, 649, 4.3, 735, "shorts", "Navy:#243e66:#f3c500;Teal:#1f8a8f:#ffffff", AP, "Quick dry", "Comfortable swim shorts with a drawcord waist that dry quickly after your swim.", "Quick-drying fabric|Drawcord waist|Inner mesh brief", "Fabric=Polyester|Length=Above knee|Care=Rinse after use"),
+      mk("football", "KIPSTA", "F100 Football Size 5", "Team sports", 210, 349, 4.5, 3120, "football", "Green:#25a35a:#1f2a30;Orange:#ef7d2d:#1f2a30;Blue:#2f6fb8:#1f2a30", null, "Match day", "A durable, machine-stitched football for friendly games and training on grass or turf.", "Resistant outer cover|Good air retention|Size 5 for adults", "Size=5|Weight=About 400 g|Surface=Grass, turf"),
+      mk("basketball", "TARMAK", "R100 Basketball Size 7", "Team sports", 599, 799, 4.5, 1067, "basket", "Orange:#e2702a;Brown:#8a4b25", null, "Court ready", "A grippy ball for outdoor and indoor courts, built to bounce well and last.", "Grippy surface|Consistent bounce|Durable rubber", "Size=7|Weight=About 600 g|Surface=Indoor, outdoor"),
+
+      mk("badminton", "PERFLY", "BR 100 Adult Badminton Racket", "Racket sports", 449, 699, 4.4, 1740, "racket", "Red:#d9413a:#2a2f33;Blue:#2f6fb8:#2a2f33;Green:#25a35a:#2a2f33", null, "Beginner", "A light, easy-to-handle racket for beginners who want to play regularly.", "Lightweight for control|Steel shaft|Comes with a racket cover", "Weight=About 90 g|Frame=Aluminium|Shaft=Steel|Level=Beginner")
+    ];
+    const FREE_DELIVERY_AT = 999;
+    const DELIVERY_FEE = 49;
+    const cart = new Map();
+    let activeFilter = "All";
+    let lastFocusedElement = null;
+    let demoOtpSent = false;
+    const DEMO_OTP = "123456";
+    const DEMO_PIN = "1234";
+    const money = amount => new Intl.NumberFormat("en-IN", {
+      style: "currency", currency: "INR", maximumFractionDigits: 0
+    }).format(amount);
+    const byId = id => document.getElementById(id);
+    const productsElement = byId("products");
+
+    const fmtN = n => n >= 1000 ? (n / 1000).toFixed(1).replace(".0", "") + "k" : n;
+    const offPct = p => Math.round((1 - p.price / p.mrp) * 100);
+    const wished = new Set();
+
+    function cardHTML(p, idx) {
+      return `<article class="card" data-open="${p.id}" tabindex="0" aria-label="${p.name}">
+        <div class="photo">
+          <div class="layer l0">${pic(p, cardColor[p.id] || 0, 0, idx < 4)}</div>
+          <div class="layer l1">${pic(p, cardColor[p.id] || 0, 1)}</div>
+          <span class="badge">${p.tag}</span><span class="off">${offPct(p)}% OFF</span>
+          <button class="wish${wished.has(p.id) ? " on" : ""}" data-wish="${p.id}" aria-label="Save ${p.name}">${wished.has(p.id) ? "♥" : "♡"}</button>
+          <span class="qv">Quick view</span>
+          <button class="add" data-add="${p.id}" aria-label="Add ${p.name} to cart">+</button>
+        </div>
+        <div class="card-info"><p class="company">${p.brand}</p>
+          <div class="dots">${p.colors.map((x, i) => `<button type="button" class="${(cardColor[p.id] || 0) === i ? "on" : ""}" data-dot="${p.id}|${i}" title="${x.n}" aria-label="${p.name} in ${x.n}" style="background:${x.a}"></button>`).join("")}</div>
+          <h3 class="product-name">${p.name}</h3>
+          <div class="product-bottom"><span class="price">${money(p.price)}<span class="mrp-price">${money(p.mrp)}</span></span></div>
+          <div class="product-bottom" style="margin-top:7px"><span class="stars"><b>${p.rating} ★</b> (${fmtN(p.reviews)})</span></div>
+        </div>
+      </article>`;
+    }
+
+    function renderProducts() {
+      const query = byId("search").value.trim().toLowerCase();
+      const shown = products.filter(product => {
+        const matchesSearch = `${product.brand} ${product.name} ${product.sport}`.toLowerCase().includes(query);
+        const matchesFilter = query || activeFilter === "All" || product.sport === activeFilter;
+        return matchesSearch && matchesFilter;
+      });
+      const sort = byId("sort").value;
+      if (sort === "lo") shown.sort((x, y) => x.price - y.price);
+      if (sort === "hi") shown.sort((x, y) => y.price - x.price);
+      if (sort === "rate") shown.sort((x, y) => y.rating - x.rating || y.reviews - x.reviews);
+      byId("result-count").textContent = query || activeFilter !== "All"
+        ? `${shown.length} ${shown.length === 1 ? "item" : "items"} found`
+        : `${products.length} products across ${new Set(products.map(p => p.sport)).size} sports`;
+      productsElement.innerHTML = shown.length ? shown.map((p, i) => cardHTML(p, i)).join("") : `<p class="no-results">No gear found. Try a different sport or search.</p>`;
+    }
+
+    function lineOf(key) {
+      const [id, ci, size] = key.split("|");
+      const p = products.find(x => x.id === id), c = p.colors[+ci];
+      return { p, c, size, key, label: `${p.name} (${c.n}${size ? ", " + size : ""})` };
+    }
+
+    function totals() {
+      const subtotal = [...cart].reduce((sum, [key, quantity]) => sum + lineOf(key).p.price * quantity, 0);
+      const delivery = subtotal === 0 || subtotal >= FREE_DELIVERY_AT ? 0 : DELIVERY_FEE;
+      return { subtotal, delivery, total: subtotal + delivery };
+    }
+
+    function renderCart() {
+      const count = [...cart.values()].reduce((sum, quantity) => sum + quantity, 0);
+      const { subtotal, delivery, total } = totals();
+      byId("cart-count").textContent = count;
+      byId("subtotal").textContent = money(subtotal);
+      byId("delivery").textContent = delivery === 0 && subtotal > 0 ? "FREE" : money(delivery);
+      byId("total").textContent = money(total);
+      byId("checkout-total").textContent = money(total);
+      byId("checkout-subtotal").textContent = money(subtotal);
+      byId("checkout-delivery").textContent = delivery === 0 && subtotal > 0 ? "FREE" : money(delivery);
+      const note = subtotal === 0 ? "Delivery calculated on your items." :
+        delivery === 0 ? "Your order qualifies for free delivery." :
+        `Add ${money(FREE_DELIVERY_AT - subtotal)} more for free delivery.`;
+      byId("shipping-note").textContent = note;
+      byId("checkout-shipping-note").textContent = note;
+      byId("checkout-items").innerHTML = [...cart].map(([key, quantity]) => {
+        const l = lineOf(key);
+        return `<div class="checkout-item"><span>${l.label} × ${quantity}</span><strong>${money(l.p.price * quantity)}</strong></div>`;
+      }).join("");
+      byId("checkout-start").disabled = cart.size === 0;
+      byId("checkout-start").style.opacity = cart.size === 0 ? ".5" : "1";
+      const lines = byId("cart-lines");
+      if (cart.size === 0) {
+        lines.innerHTML = `<div class="cart-empty">Your cart is ready for an adventure.<br><br><a class="checkout-link" href="#shop" data-close>Explore sports gear</a></div>`;
+        return;
+      }
+      lines.innerHTML = [...cart].map(([key, quantity]) => {
+        const l = lineOf(key);
+        return `<article class="cart-row"><div class="cthumb">${pic(l.p, +l.key.split("|")[1], 0)}</div>
+          <div><h3>${l.p.name}</h3><p>${l.p.brand} · ${l.c.n}${l.size ? " · " + l.size : ""} · ${money(l.p.price)}</p>
+            <div class="qty"><button data-qty="${key}" data-step="-1" aria-label="Remove one">−</button><span>${quantity}</span><button data-qty="${key}" data-step="1" aria-label="Add one">+</button></div>
+          </div><span class="row-price">${money(l.p.price * quantity)}</span></article>`;
+      }).join("");
+    }
+
+    /* ---------- Product detail (close view) ---------- */
+    const pdp = { p: null, ci: 0, size: "", qty: 1, view: 0, err: false };
+    function media(p, c, v) {
+      if (v === "photo") {
+        return `<span class="shot" data-name="${p.name}"><span class="frame"><img src="${photoList(p)[0]}" data-pid="${p.id}" data-n="0" alt="${p.name} original photo" referrerpolicy="no-referrer"></span></span>`;
+      }
+      if (typeof v === "string" && v.startsWith("official")) {
+        const url = (PHOTO_GALLERIES[p.id] || [])[Number(v.slice(8))];
+        return url ? `<span class="shot" data-name="${p.name}"><span class="frame"><img src="${url}" alt="${p.name}, ${viewLabel(v)}" referrerpolicy="no-referrer" loading="lazy" onload="this.closest('.shot').classList.add('loaded')" onerror="this.closest('.shot').classList.add('broken')"></span></span>` : viewPic(p, pdp.ci, 0, true);
+      }
+      return viewPic(p, pdp.ci, v, true);
+    }
+    function openProduct(id, ci = cardColor[id] || 0) {
+      Object.assign(pdp, { p: products.find(x => x.id === id), ci, size: "", qty: 1, view: 0, err: false });
+      renderPdp();
+      openOverlay("product-overlay");
+      byId("product-overlay").querySelector(".pdp").scrollTop = 0;
+    }
+    function renderPdp() {
+      const p = pdp.p, c = p.colors[pdp.ci], box = byId("product-overlay").querySelector(".pdp"), top = box.scrollTop;
+      const views = productViews(p);
+      const rel = products.filter(x => x.id !== p.id && x.sport === p.sport).concat(products.filter(x => x.sport !== p.sport)).slice(0, 4);
+      byId("pdp-body").innerHTML = `
+        <div class="pdp-grid">
+          <div class="gallery">
+            <div class="thumbs">${views.map(v => `<button class="thumb${v === pdp.view ? " on" : ""}" data-view="${v}" title="${viewLabel(v)}" aria-label="${viewLabel(v)}">${media(p, c, v)}</button>`).join("")}</div>
+            <div class="stage" id="stage"><div class="zoomwrap" id="zoomwrap">${media(p, c, pdp.view)}</div>
+              <span class="view-name">${viewLabel(pdp.view)}</span><span class="zoom-hint">Hover or tap to zoom</span></div>
+          </div>
+          <div class="info">
+            <p class="company">${p.brand}</p><h2 id="pdp-title">${p.name}</h2>
+            <div class="rate-line"><b>${p.rating} ★</b><span>${p.reviews.toLocaleString("en-IN")} ratings</span></div>
+            <div class="pdp-price"><strong>${money(p.price)}</strong><s>${money(p.mrp)}</s><em>${offPct(p)}% off</em></div>
+            <p class="tax">Inclusive of all taxes</p>
+            <p class="desc">${p.desc}</p>
+            <p class="opt-label">Colour: <span>${c.n}</span></p>
+            <div class="swatches">${p.colors.map((x, i) => `<button class="swatch${i === pdp.ci ? " on" : ""}" data-color="${i}" style="background:linear-gradient(135deg,${x.a} 55%,${x.b || x.a} 55%)" title="${x.n}" aria-label="${x.n}"></button>`).join("")}</div>
+            ${p.sizes ? `<p class="opt-label">Size${pdp.err ? '<b class="size-err">Please select a size</b>' : ""}</p>
+            <div class="sizes">${p.sizes.map(s => `<button class="size${s === pdp.size ? " on" : ""}" data-size="${s}">${s}</button>`).join("")}</div>` : ""}
+            <div class="buyrow">
+              <div class="qtybox"><button data-qstep="-1" aria-label="Decrease quantity">−</button><span>${pdp.qty}</span><button data-qstep="1" aria-label="Increase quantity">+</button></div>
+              <button class="primary" data-act="add">Add to cart</button><button class="secondary" data-act="buy">Buy now</button>
+            </div>
+            <ul class="mini-perks"><li>Free delivery over ₹999</li><li>Easy 30-day returns</li></ul>
+            <h3>Highlights</h3><ul class="hl">${p.hl.map(h => `<li>${h}</li>`).join("")}</ul>
+            <h3>Specifications</h3><table class="specs">${p.spec.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("")}</table>
+          </div>
+        </div>
+        <section class="related"><h3>You may also like</h3><div class="rel-grid">${rel.map(x => `<button class="rel" data-rel="${x.id}"><div class="ph">${pic(x, 0, 0, false, "small")}</div><div class="t">${x.name}<span>${money(x.price)}</span></div></button>`).join("")}</div></section>`;
+      box.scrollTop = top;
+      const stage = byId("stage"), wrap = byId("zoomwrap");
+      stage.addEventListener("mouseenter", () => { if (matchMedia("(hover:hover)").matches) stage.classList.add("zoomed"); });
+      stage.addEventListener("mouseleave", () => stage.classList.remove("zoomed"));
+      let tx = null;
+      stage.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener("touchend", e => {
+        if (tx === null || stage.classList.contains("zoomed")) { tx = null; return; }
+        const dx = e.changedTouches[0].clientX - tx; tx = null;
+        if (Math.abs(dx) < 45) return;
+        const list = productViews(p);
+        const i = list.indexOf(pdp.view), n = (i + (dx < 0 ? 1 : -1) + list.length) % list.length;
+        pdp.view = list[n]; renderPdp();
+      }, { passive: true });
+      stage.addEventListener("mousemove", e => {
+        const r = stage.getBoundingClientRect();
+        wrap.style.transformOrigin = `${(e.clientX - r.left) / r.width * 100}% ${(e.clientY - r.top) / r.height * 100}%`;
+      });
+      stage.addEventListener("click", e => {
+        const r = stage.getBoundingClientRect();
+        wrap.style.transformOrigin = `${(e.clientX - r.left) / r.width * 100}% ${(e.clientY - r.top) / r.height * 100}%`;
+        if (!matchMedia("(hover:hover)").matches) stage.classList.toggle("zoomed");
+      });
+    }
+    function pdpAdd(buyNow) {
+      const p = pdp.p;
+      if (p.sizes && !pdp.size) { pdp.err = true; renderPdp(); return; }
+      const key = `${p.id}|${pdp.ci}|${pdp.size}`;
+      cart.set(key, (cart.get(key) || 0) + pdp.qty);
+      renderCart();
+      showToast("Added to cart");
+      closeOverlay("product-overlay");
+      openOverlay(buyNow ? "checkout-overlay" : "cart-overlay");
+    }
+
+    function openOverlay(id) {
+      lastFocusedElement = document.activeElement;
+      byId(id).classList.add("open");
+      byId(id).setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      byId(id).querySelector(".close").focus();
+    }
+    function closeOverlay(id) {
+      byId(id).classList.remove("open");
+      byId(id).setAttribute("aria-hidden", "true");
+      if (![...document.querySelectorAll(".overlay")].some(overlay => overlay.classList.contains("open"))) {
+        document.body.style.overflow = "";
+      }
+      if (lastFocusedElement && document.contains(lastFocusedElement)) lastFocusedElement.focus();
+    }
+    function orderId() {
+      return `DS-${Date.now().toString().slice(-8)}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+    function updatePaymentMethod() {
+      const method = byId("checkout-form").elements.payment.value;
+      const needsOtp = method === "UPI", needsPin = method === "Card";
+      byId("otp-box").hidden = !needsOtp;
+      byId("pin-box").hidden = !needsPin;
+      byId("payment-otp").required = needsOtp;
+      byId("pay-button").textContent = needsOtp ? "Verify OTP & place demo order →" : needsPin ? "Verify PIN & place demo order →" : "Place demo order →";
+      if (!needsOtp) {
+        byId("payment-otp").setCustomValidity("");
+        byId("otp-status").textContent = "";
+      }
+      if (!needsPin) clearPin();
+      else pinDigits()[0].focus();
+    }
+    function placeDemoOrder(event) {
+      event.preventDefault();
+      if (!byId("checkout-form").reportValidity()) return;
+      if (cart.size === 0) return;
+
+      const form = new FormData(byId("checkout-form"));
+      const { subtotal, delivery, total } = totals();
+      const method = form.get("payment");
+      const requiresOtp = method === "UPI";
+      if (requiresOtp && !demoOtpSent) {
+        byId("payment-otp").setCustomValidity("Generate an OTP before placing this order.");
+        byId("payment-otp").reportValidity();
+        return;
+      }
+      if (requiresOtp && form.get("otp") !== DEMO_OTP) {
+        byId("payment-otp").setCustomValidity("That OTP is incorrect. Generate and enter the code shown on this page.");
+        byId("payment-otp").reportValidity();
+        return;
+      }
+      byId("payment-otp").setCustomValidity("");
+      if (method === "Card") {
+        const pin = pinValue();
+        if (pin.length < 4) { pinError("Enter all 4 digits of your card PIN."); return; }
+        if (pin !== DEMO_PIN) { pinError("Incorrect PIN. Please try again."); return; }
+      }
+      const now = new Date();
+      const order = {
+        id: orderId(),
+        date: new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(now),
+        name: escapeHtml(form.get("name")),
+        phone: escapeHtml(form.get("phone")),
+        address: `${escapeHtml(form.get("address"))}, ${escapeHtml(form.get("city"))} - ${escapeHtml(form.get("pincode"))}`,
+        method,
+        status: method === "Card" ? "PIN verified" : "OTP verified ·",
+        transaction: `DEMO-${Date.now().toString(36).toUpperCase()}`,
+        otpVerified: method !== "Card",
+        pinVerified: method === "Card",
+        items: [...cart].map(([key, quantity]) => { const l = lineOf(key); return { ...l.p, name: l.label, quantity }; }),
+        subtotal, delivery, total
+      };
+      renderReceipt(order);
+      clearPin();
+      cart.clear();
+      renderCart();
+      closeOverlay("checkout-overlay");
+      openOverlay("receipt-overlay");
+    }
+    function renderReceipt(order) {
+      byId("receipt-status").textContent = order.status;
+      byId("receipt-content").innerHTML = `
+        <div class="receipt-box">
+          <p class="receipt-id">ORDER ${order.id}</p>
+          <div class="receipt-detail"><span>Date</span><span>${order.date}</span></div>
+          <div class="receipt-detail"><span>Payment method</span><span>${order.method}</span></div>
+          ${order.otpVerified ? `<div class="receipt-detail"><span> OTP</span><span>Verified·</span></div>` : ""}
+          ${order.pinVerified ? `<div class="receipt-detail"><span>Card PIN</span><span>Verified</span></div>` : ""}
+          <div class="receipt-detail"><span>Transaction reference</span><span>${order.transaction}</span></div>
+          <hr class="receipt-divider">
+          <div class="receipt-items">${order.items.map(item => `<div class="receipt-item"><span>${item.name} × ${item.quantity}</span><strong>${money(item.price * item.quantity)}</strong></div>`).join("")}</div>
+          <hr class="receipt-divider">
+          <div class="receipt-detail"><span>Subtotal</span><span>${money(order.subtotal)}</span></div>
+          <div class="receipt-detail"><span>Delivery</span><span>${order.delivery === 0 ? "FREE" : money(order.delivery)}</span></div>
+          <hr class="receipt-divider">
+          <div class="receipt-total"><span>Total</span><span>${money(order.total)}</span></div>
+        </div>
+        <div class="receipt-box">
+          <strong style="font-size:10px">Deliver to</strong>
+          <p class="receipt-address">${order.name}<br>${order.address}<br>Mobile: ${order.phone}</p>
+        </div>`;
+    }
+
+    document.querySelectorAll(".filter").forEach(button => button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll(".filter").forEach(filter => filter.classList.toggle("active", filter === button));
+      renderProducts();
+    }));
+    document.querySelectorAll("[data-category]").forEach(link => link.addEventListener("click", () => {
+      const category = link.dataset.category;
+      activeFilter = category === "All" ? "All" : category;
+      document.querySelectorAll(".filter").forEach(filter => filter.classList.toggle("active", filter.dataset.filter === activeFilter));
+      renderProducts();
+    }));
+    byId("search").addEventListener("input", renderProducts);
+    byId("search").addEventListener("search", renderProducts);
+    productsElement.addEventListener("click", event => {
+      const dot = event.target.closest("[data-dot]");
+      if (dot) {
+        const [pid, idx] = dot.dataset.dot.split("|"), p = products.find(x => x.id === pid);
+        cardColor[pid] = +idx;
+        const card = dot.closest(".card");
+        card.querySelectorAll(".shot").forEach(el => el.setAttribute("style", tintStyle(p.colors[+idx])));
+        card.querySelectorAll(".dots button").forEach((b, i) => b.classList.toggle("on", i === +idx));
+        return;
+      }
+      const wish = event.target.closest("[data-wish]");
+      if (wish) {
+        const id = wish.dataset.wish;
+        wished.has(id) ? wished.delete(id) : wished.add(id);
+        wish.classList.toggle("on", wished.has(id));
+        wish.textContent = wished.has(id) ? "♥" : "♡";
+        return;
+      }
+      const add = event.target.closest("[data-add]");
+      if (add) {
+        const p = products.find(x => x.id === add.dataset.add);
+        if (p.sizes) { openProduct(p.id); return; }
+        const key = `${p.id}|${cardColor[p.id] || 0}|`;
+        cart.set(key, (cart.get(key) || 0) + 1);
+        renderCart();
+        showToast("Added to cart");
+        return;
+      }
+      const card = event.target.closest("[data-open]");
+      if (card) openProduct(card.dataset.open);
+    });
+    productsElement.addEventListener("keydown", event => {
+      if (event.key === "Enter" && event.target.matches("[data-open]")) openProduct(event.target.dataset.open);
+    });
+    byId("sort").addEventListener("change", renderProducts);
+    byId("pdp-body").addEventListener("click", event => {
+      const t = event.target.closest("button");
+      if (!t) return;
+      if (t.dataset.view) { { const v = t.dataset.view; pdp.view = (v === "photo" || v.startsWith("official")) ? v : +v; } renderPdp(); }
+      else if (t.dataset.color) { pdp.ci = +t.dataset.color; renderPdp(); }
+      else if (t.dataset.size) { pdp.size = t.dataset.size; pdp.err = false; renderPdp(); }
+      else if (t.dataset.qstep) { pdp.qty = Math.max(1, Math.min(10, pdp.qty + Number(t.dataset.qstep))); renderPdp(); }
+      else if (t.dataset.act) pdpAdd(t.dataset.act === "buy");
+      else if (t.dataset.rel) {
+        Object.assign(pdp, { p: products.find(x => x.id === t.dataset.rel), ci: 0, size: "", qty: 1, view: 0, err: false });
+        renderPdp();
+        byId("product-overlay").querySelector(".pdp").scrollTop = 0;
+      }
+    });
+    byId("cart-lines").addEventListener("click", event => {
+      const button = event.target.closest("[data-qty]");
+      if (!button) return;
+      const id = button.dataset.qty;
+      const next = (cart.get(id) || 0) + Number(button.dataset.step);
+      if (next <= 0) cart.delete(id);
+      else cart.set(id, next);
+      renderCart();
+    });
+    byId("open-cart").addEventListener("click", () => openOverlay("cart-overlay"));
+    byId("checkout-start").addEventListener("click", () => {
+      if (cart.size === 0) return;
+      closeOverlay("cart-overlay");
+      openOverlay("checkout-overlay");
+      byId("customer-name").focus();
+    });
+    byId("checkout-form").addEventListener("submit", placeDemoOrder);
+    document.querySelectorAll('input[name="payment"]').forEach(input => input.addEventListener("change", updatePaymentMethod));
+    byId("send-demo-otp").addEventListener("click", () => {
+      if (!byId("customer-phone").reportValidity()) return;
+      demoOtpSent = true;
+      byId("payment-otp").value = "";
+      byId("payment-otp").setCustomValidity("");
+      byId("otp-status").textContent = ` OTP: ${DEMO_OTP}.`;
+      byId("payment-otp").focus();
+    });
+    byId("customer-phone").addEventListener("input", () => {
+      demoOtpSent = false;
+      byId("payment-otp").value = "";
+      byId("payment-otp").setCustomValidity("");
+      byId("otp-status").textContent = "";
+    });
+    byId("payment-otp").addEventListener("input", () => byId("payment-otp").setCustomValidity(""));
+    /* ---------- Card PIN entry (demo) ---------- */
+    const pinDigits = () => [...document.querySelectorAll(".pin-digit")];
+    const pinValue = () => pinDigits().map(i => i.value).join("");
+    function clearPin() {
+      pinDigits().forEach(i => { i.value = ""; i.classList.remove("filled", "bad"); });
+      byId("pin-status").textContent = "";
+    }
+    function pinError(msg) {
+      pinDigits().forEach(i => { i.classList.remove("bad"); void i.offsetWidth; i.classList.add("bad"); i.value = ""; i.classList.remove("filled"); });
+      byId("pin-status").textContent = msg;
+      pinDigits()[0].focus();
+    }
+    pinDigits().forEach((input, idx, all) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(-1);
+        input.classList.toggle("filled", !!input.value);
+        all.forEach(x => x.classList.remove("bad"));
+        byId("pin-status").textContent = "";
+        if (input.value && all[idx + 1]) all[idx + 1].focus();
+      });
+      input.addEventListener("keydown", e => {
+        if (e.key === "Backspace" && !input.value && all[idx - 1]) {
+          all[idx - 1].value = ""; all[idx - 1].classList.remove("filled"); all[idx - 1].focus();
+        } else if (e.key === "ArrowLeft" && all[idx - 1]) all[idx - 1].focus();
+        else if (e.key === "ArrowRight" && all[idx + 1]) all[idx + 1].focus();
+      });
+      input.addEventListener("focus", () => input.select());
+      input.addEventListener("paste", e => {
+        const d = ((e.clipboardData || window.clipboardData).getData("text") || "").replace(/\D/g, "").slice(0, 4);
+        if (!d) return;
+        e.preventDefault();
+        all.forEach((x, i) => { x.value = d[i] || ""; x.classList.toggle("filled", !!x.value); });
+        all[Math.min(d.length, 3)].focus();
+      });
+    });
+
+    document.querySelectorAll("[data-close]").forEach(button => button.addEventListener("click", event => {
+      event.preventDefault();
+      const overlay = button.closest(".overlay");
+      if (overlay) closeOverlay(overlay.id);
+    }));
+    document.querySelectorAll(".overlay").forEach(overlay => overlay.addEventListener("click", event => {
+      if (event.target === overlay) closeOverlay(overlay.id);
+    }));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        const open = document.querySelector(".overlay.open");
+        if (open) closeOverlay(open.id);
+      }
+    });
+    byId("print-receipt").addEventListener("click", () => window.print());
+    byId("done-shopping").addEventListener("click", () => {
+      closeOverlay("receipt-overlay");
+      window.location.hash = "shop";
+    });
+    updatePaymentMethod();
+    renderProducts();
+    renderCart();
+    
+  </script>
+</body>
+</html>
